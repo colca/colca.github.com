@@ -4,7 +4,7 @@
   <title><![CDATA[KamaComa]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2013-09-17T23:49:32-07:00</updated>
+  <updated>2013-09-17T23:51:16-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -82,7 +82,7 @@ To enter psql command with default user postgres<br></li>
 
 <p>links<br>
 Heroku postgresql:
-<a href="https://devcenter.heroku.com/articles/heroku-postgresql">https://devcenter.heroku.com/articles/heroku-postgresql</a>
+<a href="https://devcenter.heroku.com/articles/heroku-postgresql">https://devcenter.heroku.com/articles/heroku-postgresql</a><br>
 Postgresql document:
 <a href="http://www.postgresql.org/docs/9.2/static/bookindex.html">http://www.postgresql.org/docs/9.2/static/bookindex.html</a></p>
 ]]></content>

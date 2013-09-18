@@ -4,7 +4,7 @@
   <title><![CDATA[KamaComa]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2013-09-17T23:38:36-07:00</updated>
+  <updated>2013-09-17T23:49:32-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -19,45 +19,68 @@
     <updated>2013-09-17T18:35:00-07:00</updated>
     <id>http://colca.github.com/blog/2013/09/17/setup-postgresql</id>
     <content type="html"><![CDATA[<ol>
-<li><p>Install postgresql <br>
-&lsquo;&rsquo;&lsquo;
-apt-get install postgresql
-&rsquo;&lsquo;&rsquo;
-update Gemfile, eliminate sqlite, add pg gem
-&lsquo;&rsquo;&lsquo;
-gem &#8216;pg&rsquo;, &lsquo;0.12.2&rsquo;
-&lsquo;&rsquo;&lsquo;
-then bundle install,<br>
-solution if error encounted with pg gem install<br>
-<a href="http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html">http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html</a></p></li>
-<li><p>Manage database<br>
-To enter psql command with default user postgres<br>
-&lsquo;&rsquo;&lsquo;
-psql postgres
-&rsquo;&lsquo;&rsquo;</p></li>
+<li>Install postgresql <br></li>
 </ol>
 
 
-<p>To create database, list database, list roles<br>
-&lsquo;&rsquo;&lsquo;
-CREATE USER yourname WITH SUPERUSER PASSWORD &#8216;yourpassword&rsquo;;
-\l
-\du
-&lsquo;&rsquo;&#8217;</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install postgresql</span></code></pre></td></tr></table></div></figure>
 
-<p>To quit<br>
-&lsquo;&rsquo;&lsquo;
-\q
-&rsquo;&lsquo;&rsquo;
-3. Connect in Ruby, edit database.yml<br>
-&lsquo;&rsquo;&lsquo;
-  adapter:  postgresql
-  database: postgres    <br/>
-  pool: 5
-  username: username
-  password: password
-&rsquo;&lsquo;&rsquo;
-links<br>
+
+<p>update Gemfile, eliminate sqlite, add pg gem</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'pg', '0.12.2'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then bundle install,<br>
+solution if error encounted with pg gem install<br>
+<a href="http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html">http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html</a></p>
+
+<ol>
+<li>Manage database<br>
+To enter psql command with default user postgres<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>psql postgres</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To create database, list database, list roles<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE USER yourname WITH SUPERUSER PASSWORD 'yourpassword';
+</span><span class='line'>\l
+</span><span class='line'>\du</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To quit<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>\q</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Connect in Ruby, edit database.yml<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  adapter:  postgresql
+</span><span class='line'>  database: postgres    
+</span><span class='line'>  pool: 5
+</span><span class='line'>  username: username
+</span><span class='line'>  password: password</span></code></pre></td></tr></table></div></figure>
+
+
+<p>links<br>
 Heroku postgresql:
 <a href="https://devcenter.heroku.com/articles/heroku-postgresql">https://devcenter.heroku.com/articles/heroku-postgresql</a>
 Postgresql document:

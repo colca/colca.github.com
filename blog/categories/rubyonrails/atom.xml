@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RubyOnRails | KamaComa]]></title>
   <link href="http://colca.github.com/blog/categories/rubyonrails/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2013-09-17T23:38:36-07:00</updated>
+  <updated>2013-09-17T23:49:32-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -20,43 +20,43 @@
     <id>http://colca.github.com/blog/2013/09/17/setup-postgresql</id>
     <content type="html"><![CDATA[<ol>
 <li><p>Install postgresql <br>
-&lsquo;&rsquo;&lsquo;
+<code>
 apt-get install postgresql
-&rsquo;&lsquo;&rsquo;
+</code>
 update Gemfile, eliminate sqlite, add pg gem
-&lsquo;&rsquo;&lsquo;
-gem 'pg&rsquo;, &lsquo;0.12.2&rsquo;
-&lsquo;&rsquo;&lsquo;
+<code>
+gem 'pg', '0.12.2'
+</code>
 then bundle install,<br>
 solution if error encounted with pg gem install<br>
 <a href="http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html">http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html</a></p></li>
 <li><p>Manage database<br>
 To enter psql command with default user postgres<br>
-&lsquo;&rsquo;&lsquo;
+<code>
 psql postgres
-&rsquo;&lsquo;&rsquo;</p></li>
+</code></p></li>
 </ol>
 
 
 <p>To create database, list database, list roles<br>
-&lsquo;&rsquo;&lsquo;
-CREATE USER yourname WITH SUPERUSER PASSWORD 'yourpassword&rsquo;;
+<code>
+CREATE USER yourname WITH SUPERUSER PASSWORD 'yourpassword';
 \l
 \du
-&lsquo;&rsquo;'</p>
+</code></p>
 
 <p>To quit<br>
-&lsquo;&rsquo;&lsquo;
+<code>
 \q
-&rsquo;&lsquo;&rsquo;
+</code>
 3. Connect in Ruby, edit database.yml<br>
-&lsquo;&rsquo;&lsquo;
+<code>
   adapter:  postgresql
-  database: postgres    <br/>
+  database: postgres      
   pool: 5
   username: username
   password: password
-&rsquo;&lsquo;&rsquo;
+</code>
 links<br>
 Heroku postgresql:
 <a href="https://devcenter.heroku.com/articles/heroku-postgresql">https://devcenter.heroku.com/articles/heroku-postgresql</a>

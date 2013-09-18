@@ -5,15 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>KamaComa</title>
+  <title>How To Setup Octopress Blog on Windows 7 - KamaComa</title>
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Install postgresql &lsquo;&rsquo;&lsquo;
-apt-get install postgresql
-&rsquo;&lsquo;&rsquo;
-update Gemfile, eliminate sqlite, add pg gem
-&lsquo;&rsquo &hellip;">
+  <meta name="description" content="Reference:
+http://octopress.org/docs/setup/
+http://evsseny.appspot.com/2012/03/30/Octopress-blog-install.html
+http://geekontheway.github.com/blog/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +21,7 @@ update Gemfile, eliminate sqlite, add pg gem
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://colca.github.com">
+  <link rel="canonical" href="http://colca.github.com/blog/2013/03/28/setup-octopress-blog-on-windows-7">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KamaComa" type="application/atom+xml">
@@ -67,206 +66,12 @@ update Gemfile, eliminate sqlite, add pg gem
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/09/17/setup-postgresql/">Setup Postgresql</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-17T18:35:00-07:00" pubdate data-updated="true">Sep 17<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
-<li><p>Install postgresql <br>
-&lsquo;&rsquo;&lsquo;
-apt-get install postgresql
-&rsquo;&lsquo;&rsquo;
-update Gemfile, eliminate sqlite, add pg gem
-&lsquo;&rsquo;&lsquo;
-gem &#8216;pg&rsquo;, &lsquo;0.12.2&rsquo;
-&lsquo;&rsquo;&lsquo;
-then bundle install,<br>
-solution if error encounted with pg gem install<br>
-<a href="http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html">http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html</a></p></li>
-<li><p>Manage database<br>
-To enter psql command with default user postgres<br>
-&lsquo;&rsquo;&lsquo;
-psql postgres
-&rsquo;&lsquo;&rsquo;</p></li>
-</ol>
-
-
-<p>To create database, list database, list roles<br>
-&lsquo;&rsquo;&lsquo;
-CREATE USER yourname WITH SUPERUSER PASSWORD &#8216;yourpassword&rsquo;;
-\l
-\du
-&lsquo;&rsquo;&#8217;</p>
-
-<p>To quit<br>
-&lsquo;&rsquo;&lsquo;
-\q
-&rsquo;&lsquo;&rsquo;
-3. Connect in Ruby, edit database.yml<br>
-&lsquo;&rsquo;&lsquo;
-  adapter:  postgresql
-  database: postgres    <br/>
-  pool: 5
-  username: username
-  password: password
-&rsquo;&lsquo;&rsquo;
-links<br>
-Heroku postgresql:
-<a href="https://devcenter.heroku.com/articles/heroku-postgresql">https://devcenter.heroku.com/articles/heroku-postgresql</a>
-Postgresql document:
-<a href="http://www.postgresql.org/docs/9.2/static/bookindex.html">http://www.postgresql.org/docs/9.2/static/bookindex.html</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/13/how-to-format-code-in-vim/">VI: Format Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-13T00:28:00-07:00" pubdate data-updated="true">Apr 13<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gg
-</span><span class='line'>Shift+v
-</span><span class='line'>Shift+g
-</span><span class='line'>=</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/31/outdoor-trails/">Outdoor Trails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-31T20:51:00-08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>2005 – 2011 <br></h2>
-
-<p>Involved in first outdoor activity on 2005, did a lot of 2-days trails in Zhejiang, Jiangxi, Shanxi  and other provinces of China during weekends and holidays, most of the trails are to climb mountains with height between 1400 to 1800m (4600-5900feet). Typical routine is 1 or 2 day camping plus 2 or 3 day hiking.<br></p>
-
-<h2>Oct 2006   Taibai Mountain, Shanxi Province, China (3767m)<br></h2>
-
-<p>4 day hiking with a 30 size team; experienced a diverse environment where middle temperature climate and alpine climate can be found in same area, with glacial remnants from Quaternary Glacier. <br>
-<a href="http://en.wikipedia.org/wiki/Mount_Taibai">http://en.wikipedia.org/wiki/Mount_Taibai</a><br></p>
-
-<h2>Oct 2007  Fairy Lake, Sichuan Province, China (4125m)<br></h2>
-
-<p>4 day hiking in an unexploited scene in Tibetan region of Sichuan province, with 5 teammates; it’s the most beautiful and mysterious alpine lake I’ve visited.
-<a href="http://flickrhivemind.net/Tags/jiulong/Interesting">http://flickrhivemind.net/Tags/jiulong/Interesting</a><br></p>
-
-<h2>Oct 2008   Motuo, Tibet, China (1225-4170m)<br></h2>
-
-<p>4 day trekking to the last untouched country in China, with 5 teammates; Motuo is called “hidden lotus” as its mysterious location and isolation with outside world.  You can experience mountains above 4000m, waterfall, the turbulent Brahmaputra River, and sharp altitude falling to 800m in this one trekking trail with endless accompany of thrilling leeches. <br>
-<a href="http://www.tibettravel.org/trekking-tibet/trek-to-motuo.html">http://www.tibettravel.org/trekking-tibet/trek-to-motuo.html</a><br></p>
-
-<h2>Oct 2009  Erfeng(peak of the 2nd  sister) Four  Sister Mountain, Sichuan, China(5276m)<br></h2>
-
-<p>2 day trekking and climbing to the second highest mountain of Siguniang Moutain(Four Sister Mountain), we made it to less than 100m to the peak of the mountain due to the big snow. <br>
-<a href="http://wikitravel.org/en/Siguniangshan_National_Parks">http://wikitravel.org/en/Siguniangshan_National_Parks</a><br></p>
-
-<h2>Oct 2010   Genie Mountain, Sichuan, China (3700-4150m)<br></h2>
-
-<p>4 day trekking in area of Genie Mountain; enjoyed the beautiful scene of snow mountain, turquoise alpine lakes and time-honored Tibetan temples. <br>
-<a href="http://en.wikipedia.org/wiki/Grid_Nie_Mountain">http://en.wikipedia.org/wiki/Grid_Nie_Mountain</a><br></p>
-
-<h2>Oct 2012   Qizanggou Valley Trail, Sichuan, China (3100-4200m)<br></h2>
-
-<p>4 day trekking and horse trekking trail to unexploited holy Tibetan Mountains and Holy lake deep in the valley where Tibetans pray and do the ceremonies. <br>
-<a href="http://www.facebook.com/media/set/?set=a.4136213717990.2161159.1062998436&amp;type=3">http://www.facebook.com/media/set/?set=a.4136213717990.2161159.1062998436&amp;type=3</a><br></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/28/setup-octopress-blog-on-windows-7/">How to Setup Octopress Blog on Windows 7</a></h1>
+      <h1 class="entry-title">How to Setup Octopress Blog on Windows 7</h1>
     
     
       <p class="meta">
@@ -289,7 +94,7 @@ Postgresql document:
   </header>
 
 
-  <div class="entry-content"><p>Reference:<br>
+<div class="entry-content"><p>Reference:<br>
 <a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a><br>
 <a href="http://evsseny.appspot.com/2012/03/30/Octopress-blog-install.html">http://evsseny.appspot.com/2012/03/30/Octopress-blog-install.html</a><br>
 <a href="http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/">http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/</a><br></p>
@@ -387,18 +192,59 @@ To solve gbk error with CH character on windows</p>
 
 
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">colca</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2013-03-28T14:55:00-08:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/windows/'>windows</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2013/03/28/setup-octopress-blog-on-windows-7/" data-via="" data-counturl="http://colca.github.com/blog/2013/03/28/setup-octopress-blog-on-windows-7/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/03/31/outdoor-trails/" title="Next Post: Outdoor trails">Outdoor trails &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -430,6 +276,7 @@ To solve gbk error with CH character on windows</p>
 
   
 </aside>
+
 
     </div>
   </div>

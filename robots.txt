@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://colca.github.io/sitemap.xml 

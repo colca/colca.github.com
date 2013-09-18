@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2013-09-18T00:29:12-07:00</updated>
+  <updated>2013-09-18T11:48:13-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Setup Postgresql]]></title>
+    <title type="html"><![CDATA[Setup Postgresql for Rails Project]]></title>
     <link href="http://colca.github.com/blog/2013/09/17/setup-postgresql/"/>
     <updated>2013-09-17T18:35:00-07:00</updated>
     <id>http://colca.github.com/blog/2013/09/17/setup-postgresql</id>

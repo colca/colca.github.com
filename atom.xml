@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2013-09-20T18:56:23-07:00</updated>
+  <updated>2013-09-20T18:57:20-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -248,48 +248,6 @@ To solve gbk error with CH character on windows</p>
 
 
 
-
-<script type="text/javascript"> 
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://127.0.0.1/piwik//";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 1]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-
-</script>
-
-
-<p><noscript><p><img src="http://127.0.0.1/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript></p>
-
-<!-- End Piwik Code -->
-
-
-<p>&ldquo; ============================================================================
-&rdquo; Netrw Directory Listing                                        (netrw v143)
-&ldquo;   /home/colca/octopress/source
-&rdquo;   Sorted by      name
-&ldquo;   Sort sequence: [\/]$,&lt;core\%(.\d+)\=>,.h$,.c$,.cpp$,\~\=*$,*,.o$,.obj$,.info$,.swp$,.bak$,\~$
-&rdquo;   Quick Help: <F1>:help  &ndash;:go up dir  D:delete  R:rename  s:sort-by  x:exec
-&ldquo; ============================================================================
-../
-<em>includes/
-</em>layouts/
-_posts/
-assets/
-blog/
-images/
-javascripts/
-stylesheets/
-CNAME
-atom.xml
-favicon.png
-index.html
-robots.txt</p>
 ]]></content>
   </entry>
   

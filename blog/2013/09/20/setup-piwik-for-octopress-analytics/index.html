@@ -95,36 +95,54 @@ Instruction Details: https://www.digitalocean.com/community/articles/how-to-inst
 <div class="entry-content"><ol>
 <li><p>Install Piwik on Ubunto 12.04 Cloud Server</br>
 Instruction Details: <a href="https://www.digitalocean.com/community/articles/how-to-install-piwik-on-an-ubuntu-12-04-cloud-server">https://www.digitalocean.com/community/articles/how-to-install-piwik-on-an-ubuntu-12-04-cloud-server</a> </br></p></li>
-<li><p>Install Piwik on Octopress</br>
-Instruction Details: //github.com/WyriHaximus/OctopressPiwik<br></p></li>
-<li><p>Login to Piwik to view the realtime analytics
-<a href="http://127.0.0.1/piwik/index.php">http://127.0.0.1/piwik/index.php</a></p></li>
+<li><p>Add Piwik Script to Each Octopress Blog</br></p></li>
 </ol>
 
 
-<!-- Piwik -->
+<p>Edit your source/_includes/custom/after_footer.html, add below script</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- Piwik --&gt;
+</span><span class='line'>&lt;script type="text/javascript"&gt; 
+</span><span class='line'>  var _paq = _paq || [];
+</span><span class='line'>  _paq.push(['trackPageView']);
+</span><span class='line'>  _paq.push(['enableLinkTracking']);
+</span><span class='line'>  (function() {
+</span><span class='line'>    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://127.0.0.1/piwik//";
+</span><span class='line'>    _paq.push(['setTrackerUrl', u+'piwik.php']);
+</span><span class='line'>    _paq.push(['setSiteId', 1]);
+</span><span class='line'>    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+</span><span class='line'>    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+</span><span class='line'>  })();
+</span><span class='line'>
+</span><span class='line'>&lt;/script&gt;
+</span><span class='line'>&lt;noscript&gt;&lt;p&gt;&lt;img src="http://127.0.0.1/piwik/piwik.php?idsite=1" style="border:0" alt="" /&gt;&lt;/p&gt;&lt;/noscript&gt;
+</span><span class='line'>&lt;!-- End Piwik Code --&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<script type="text/javascript"> 
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://127.0.0.1/piwik//";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 1]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
+<p>  <br/>
+reforence: <a href="http://octopress.org/docs/theme/template/">http://octopress.org/docs/theme/template/</a> </br>
+//github.com/WyriHaximus/OctopressPiwik </br></p>
 
-</script>
-
-
-<p><noscript><p><img src="http://127.0.0.1/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript></p>
-
-<!-- End Piwik Code -->
-
-
+<ol>
+<li>Login to Piwik to view the realtime analytics
+<a href="http://127.0.0.1/piwik/index.php">http://127.0.0.1/piwik/index.php</a></li>
+</ol>
 
 </div>
 
@@ -168,8 +186,6 @@ Instruction Details: //github.com/WyriHaximus/OctopressPiwik<br></p></li>
         <a class="basic-alignment left" href="/blog/2013/09/17/setup-postgresql/" title="Previous Post: Setup Postgresql for Rails Project">&laquo; Setup Postgresql for Rails Project</a>
       
       
-        <a class="basic-alignment right" href="/blog/2013/09/20/test/" title="Next Post: test">test &raquo;</a>
-      
     </p>
   </footer>
 </article>
@@ -181,10 +197,6 @@ Instruction Details: //github.com/WyriHaximus/OctopressPiwik<br></p></li>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/09/20/test/">Test</a>
-      </li>
     
       <li class="post">
         <a href="/blog/2013/09/20/setup-piwik-for-octopress-analytics/">Setup Piwik for Octopress Analytics</a>
@@ -200,6 +212,10 @@ Instruction Details: //github.com/WyriHaximus/OctopressPiwik<br></p></li>
     
       <li class="post">
         <a href="/blog/2013/03/31/outdoor-trails/">Outdoor Trails</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/28/setup-octopress-blog-on-windows-7/">How to Setup Octopress on Windows 7</a>
       </li>
     
   </ul>

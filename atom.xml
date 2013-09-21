@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2013-09-20T18:55:19-07:00</updated>
+  <updated>2013-09-20T18:56:23-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -247,7 +247,7 @@ To solve gbk error with CH character on windows</p>
 </span><span class='line'>set LANG=en_US.UTF-8</span></code></pre></td></tr></table></div></figure>
 
 
-<p>wik &mdash;></p>
+
 
 <script type="text/javascript"> 
   var _paq = _paq || [];

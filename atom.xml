@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2013-09-20T21:11:32-07:00</updated>
+  <updated>2013-09-20T21:19:12-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://colca.github.com/blog/2013/09/20/test/"/>
+    <updated>2013-09-20T21:19:00-07:00</updated>
+    <id>http://colca.github.com/blog/2013/09/20/test</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setup Piwik for Octopress Analytics]]></title>

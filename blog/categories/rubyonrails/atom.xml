@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: RubyOnRails | KamAcoma]]></title>
+  <link href="http://colca.github.com/blog/categories/rubyonrails/atom.xml" rel="self"/>
+  <link href="http://colca.github.com/"/>
+  <updated>2013-09-21T17:43:26-07:00</updated>
+  <id>http://colca.github.com/</id>
+  <author>
+    <name><![CDATA[colca]]></name>
+    <email><![CDATA[colca7@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setup Postgresql for Rails Project]]></title>
+    <link href="http://colca.github.com/blog/2013/09/17/setup-postgresql/"/>
+    <updated>2013-09-17T18:35:00-07:00</updated>
+    <id>http://colca.github.com/blog/2013/09/17/setup-postgresql</id>
+    <content type="html"><![CDATA[<ol>
+<li><p>Install postgresql <br>
+<code>
+apt-get install postgresql
+</code>
+update Gemfile, eliminate sqlite, add pg gem
+<code>
+gem 'pg', '0.12.2'
+</code>
+then bundle install,<br>
+solution if error encounted with pg gem install<br>
+<a href="http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html">http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html</a></p></li>
+<li><p>Manage database<br>
+To enter psql command with default user postgres<br>
+<code>
+psql postgres
+</code></p></li>
+</ol>
+
+
+<p>To create database, list database, list roles<br>
+<code>
+CREATE USER yourname WITH SUPERUSER PASSWORD 'yourpassword';
+\l
+\du
+</code></p>
+
+<p>To quit<br>
+<code>
+\q
+</code>
+3. Connect in Ruby, edit database.yml<br>
+<code>
+  adapter:  postgresql
+  database: postgres      
+  pool: 5
+  username: username
+  password: password
+</code>
+links<br>
+Heroku postgresql:
+<a href="https://devcenter.heroku.com/articles/heroku-postgresql">https://devcenter.heroku.com/articles/heroku-postgresql</a><br>
+Postgresql document:
+<a href="http://www.postgresql.org/docs/9.2/static/bookindex.html">http://www.postgresql.org/docs/9.2/static/bookindex.html</a></p>
+]]></content>
+  </entry>
+  
+</feed>

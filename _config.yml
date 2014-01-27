@@ -3,8 +3,8 @@
 # ----------------------- #
 
 url: http://colca.github.com
-title:  KamaComa
-subtitle: A blogging framework for hackers.
+title:  KamAcoma
+subtitle: A place for code and minds.
 author: colca
 simple_search: http://google.com/search
 description:
@@ -98,3 +98,7 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+# Piwik
+piwik_host_name: 127.0.0.1/piwik #piwik server hostname
+piwik_site_id: 1 #site id

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How To Setup Octopress Blog on Windows 7"
+title: "How To Setup Octopress on Windows 7"
 date: 2013-03-28 14:55
 comments: true
 categories: windows
@@ -66,6 +66,5 @@ To solve gbk error with CH character on windows
 set LC_ALL=en_US.UTF-8
 set LANG=en_US.UTF-8
 ```
-
 
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setup Postgresql"
+title: "Setup Postgresql for Rails Project"
 date: 2013-09-17 18:35
 comments: true
 categories: RubyOnRails 
@@ -44,7 +44,7 @@ To quit<br>
 ```
 links<br>
 Heroku postgresql:
-https://devcenter.heroku.com/articles/heroku-postgresql
+https://devcenter.heroku.com/articles/heroku-postgresql<br>
 Postgresql document:
 http://www.postgresql.org/docs/9.2/static/bookindex.html
 

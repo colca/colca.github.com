@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-01-27T07:20:06-08:00</updated>
+  <updated>2014-01-27T07:33:42-08:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress:sync octopress on different machines]]></title>
+    <link href="http://colca.github.com/blog/2014/01/27/octopress-sync-octopress-on-different-machines/"/>
+    <updated>2014-01-27T07:28:00-08:00</updated>
+    <id>http://colca.github.com/blog/2014/01/27/octopress-sync-octopress-on-different-machines</id>
+    <content type="html"><![CDATA[<p>1.Follow normal setup process</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'>cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
+</span><span class='line'>ruby --version  # Should report Ruby 1.9.3
+</span><span class='line'>gem install bundler
+</span><span class='line'>bundle install
+</span><span class='line'>rake install
+</span><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>2.Pull latest updates from remote branch to sync new machine with latest octopress</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress\
+</span><span class='line'>git pull origin source
+</span><span class='line'>cd _deploy
+</span><span class='line'>git pull origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can use rake to deploy new blogs from another machine!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git:revert]]></title>
+    <link href="http://colca.github.com/blog/2014/01/27/git-undo-a-merge/"/>
+    <updated>2014-01-27T07:22:00-08:00</updated>
+    <id>http://colca.github.com/blog/2014/01/27/git-undo-a-merge</id>
+    <content type="html"><![CDATA[<p>To view git commit info: </br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git log</span></code></pre></td></tr></table></div></figure>
+
+
+<p>press q to exit log navigation </br>
+</br>
+Reset using commit-sha or numbers: </br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard commit_sha
+</span><span class='line'>
+</span><span class='line'>git reset --hard HEAD~5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use gitk for details of commit info: </br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gitk HEAD @{u}
+</span><span class='line'>
+</span><span class='line'>gitk</span></code></pre></td></tr></table></div></figure>
+
+
+<p>from: </br>
+<a href="http://stackoverflow.com/questions/2389361/undo-a-git-merge">http://stackoverflow.com/questions/2389361/undo-a-git-merge</a>
+<a href="http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not">http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setup Piwik for Octopress Analytics]]></title>

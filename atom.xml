@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-01-27T07:33:42-08:00</updated>
+  <updated>2014-01-27T07:36:27-08:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[octopress:sync octopress on different machines]]></title>
+    <title type="html"><![CDATA[octopress:Sync octopress on different machines]]></title>
     <link href="http://colca.github.com/blog/2014/01/27/octopress-sync-octopress-on-different-machines/"/>
     <updated>2014-01-27T07:28:00-08:00</updated>
     <id>http://colca.github.com/blog/2014/01/27/octopress-sync-octopress-on-different-machines</id>

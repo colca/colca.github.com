@@ -5,14 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Setup Postgresql for Rails Project - KamAcoma</title>
+  <title>git:revert - KamAcoma</title>
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Install postgresql 1
-apt-get install postgresql update Gemfile, eliminate sqlite, add pg gem 1
-gem 'pg', '0.12.2' then bundle install,
-solution if &hellip;">
+  <meta name="description" content="To view git commit info: 1
+git log press q to exit log navigation Reset using commit-sha or numbers: 1
+2
+3
+git reset --hard commit_sha git reset -- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +22,7 @@ solution if &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://colca.github.com/blog/2013/09/17/setup-postgresql">
+  <link rel="canonical" href="http://colca.github.com/blog/2014/01/27/git-undo-a-merge">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KamAcoma" type="application/atom+xml">
@@ -71,7 +72,7 @@ solution if &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Setup Postgresql for Rails Project</h1>
+      <h1 class="entry-title">Git:revert</h1>
     
     
       <p class="meta">
@@ -87,80 +88,44 @@ solution if &hellip;">
   
 
 
-<time datetime="2013-09-17T18:35:00-07:00" pubdate data-updated="true">Sep 17<span>th</span>, 2013</time>
+<time datetime="2014-01-27T07:22:00-08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><ol>
-<li>Install postgresql <br></li>
-</ol>
-
+<div class="entry-content"><p>To view git commit info: </br></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install postgresql</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git log</span></code></pre></td></tr></table></div></figure>
 
 
-<p>update Gemfile, eliminate sqlite, add pg gem</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'pg', '0.12.2'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>then bundle install,<br>
-solution if error encounted with pg gem install<br>
-<a href="http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html">http://about-opensource.blogspot.com/2012/09/rails-3-application-issue-you-need-to.html</a></p>
-
-<ol>
-<li>Manage database<br>
-To enter psql command with default user postgres<br></li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>psql postgres</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To create database, list database, list roles<br></p>
+<p>press q to exit log navigation </br>
+</br>
+Reset using commit-sha or numbers: </br></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE USER yourname WITH SUPERUSER PASSWORD 'yourpassword';
-</span><span class='line'>\l
-</span><span class='line'>\du</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard commit_sha
+</span><span class='line'>
+</span><span class='line'>git reset --hard HEAD~5</span></code></pre></td></tr></table></div></figure>
 
 
-<p>To quit<br></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>\q</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Connect in Ruby, edit database.yml<br></li>
-</ol>
-
+<p>Use gitk for details of commit info: </br></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  adapter:  postgresql
-</span><span class='line'>  database: postgres    
-</span><span class='line'>  pool: 5
-</span><span class='line'>  username: username
-</span><span class='line'>  password: password</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gitk HEAD @{u}
+</span><span class='line'>
+</span><span class='line'>gitk</span></code></pre></td></tr></table></div></figure>
 
 
-<p>links<br>
-Heroku postgresql:
-<a href="https://devcenter.heroku.com/articles/heroku-postgresql">https://devcenter.heroku.com/articles/heroku-postgresql</a><br>
-Postgresql document:
-<a href="http://www.postgresql.org/docs/9.2/static/bookindex.html">http://www.postgresql.org/docs/9.2/static/bookindex.html</a></p>
+<p>from: </br>
+<a href="http://stackoverflow.com/questions/2389361/undo-a-git-merge">http://stackoverflow.com/questions/2389361/undo-a-git-merge</a>
+<a href="http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not">http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not</a></p>
 </div>
 
 
@@ -183,21 +148,15 @@ Postgresql document:
   
 
 
-<time datetime="2013-09-17T18:35:00-07:00" pubdate data-updated="true">Sep 17<span>th</span>, 2013</time>
+<time datetime="2014-01-27T07:22:00-08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2013/09/17/setup-postgresql/" data-via="" data-counturl="http://colca.github.com/blog/2013/09/17/setup-postgresql/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2014/01/27/git-undo-a-merge/" data-via="" data-counturl="http://colca.github.com/blog/2014/01/27/git-undo-a-merge/" >Tweet</a>
   
   
   
@@ -206,10 +165,10 @@ Postgresql document:
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/04/13/how-to-format-code-in-vim/" title="Previous Post: Vi: format code">&laquo; Vi: format code</a>
+        <a class="basic-alignment left" href="/blog/2013/09/20/setup-piwik-for-octopress-analytics/" title="Previous Post: Setup Piwik for Octopress Analytics">&laquo; Setup Piwik for Octopress Analytics</a>
       
       
-        <a class="basic-alignment right" href="/blog/2013/09/20/setup-piwik-for-octopress-analytics/" title="Next Post: Setup Piwik for Octopress Analytics">Setup Piwik for Octopress Analytics &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/01/27/octopress-sync-octopress-on-different-machines/" title="Next Post: Octopress: sync octopress on different machines">Octopress: sync octopress on different machines &raquo;</a>
       
     </p>
   </footer>

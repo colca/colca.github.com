@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-02-09T21:25:37-08:00</updated>
+  <updated>2014-02-09T21:27:11-08:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -310,7 +310,7 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
 </span><span class='line'>Estimated value of Pi is 3.60000000000000000000</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Source: <a href="http://codesfusion.blogspot.com/2013/10/setup-hadoop-2x-220-on-ubuntu.html?m=1">http://codesfusion.blogspot.com/2013/10/setup-hadoop-2x-220-on-ubuntu.html?m=1</a><br>
+<p>Source:<br> <a href="http://codesfusion.blogspot.com/2013/10/setup-hadoop-2x-220-on-ubuntu.html?m=1">http://codesfusion.blogspot.com/2013/10/setup-hadoop-2x-220-on-ubuntu.html?m=1</a><br>
 <a href="http://nextgenhadoop.blogspot.com/2013/10/steps-to-install-hadoop-220-stable.html">http://nextgenhadoop.blogspot.com/2013/10/steps-to-install-hadoop-220-stable.html</a><br>
 <a href="http://tecadmin.net/steps-to-install-hadoop-on-centosrhel-6/#">http://tecadmin.net/steps-to-install-hadoop-on-centosrhel-6/#</a> <br></p>
 ]]></content>

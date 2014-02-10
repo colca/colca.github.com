@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hadoop | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/hadoop/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-02-09T21:17:12-08:00</updated>
+  <updated>2014-02-09T21:23:28-08:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -24,7 +24,7 @@ Download java from : <a href="http://www.oracle.com/technetwork/java/javase/down
 <p><code>
 tar xzf jdk-7u51-linux-x64.gz -C /usr/lib/jvm
 </code>
-$Check java version and create link jdk
+Check java version and create link jdk
 <code>
 $java --version
 ...
@@ -116,9 +116,10 @@ $vi core-site.xml</p>
 <property>
 <name>dfs.permissions</name>
 <value>false</value>
-</property></p>
-
-<p>$vi yarn-site.xml</p>
+</property>
+<code>
+</code>
+$vi yarn-site.xml</p>
 
 <h1>paste following between <configuration> tag</h1>
 
@@ -129,9 +130,10 @@ $vi core-site.xml</p>
 <property>
 <name>yarn.nodemanager.aux_services.mapreduce.shuffle.class</name>
 <value>org.apache.hadoop.mapred.ShuffleHandler</value>
-</property></p>
-
-<p>$cd ~
+</property>
+<code>
+</code>
+$cd ~
 $mkdir -p mydata/hdfs/namenode
 $mkdir -p mydata/hdfs/datanode
 $cd /usr/local/hadoop/etc/hadoop

@@ -28,7 +28,9 @@ $footer-bg-back: linear-gradient(lighten($footer-bg, 8), $footer-bg, darken($foo
 
 /* If you want to tweak the Solarized colors you can do that here */
 $base03:          #002b36; //darkest blue
+$base04:		  #420041; //dark purple
 $base02:          #073642; //dark blue
+$base05:			#5c005a;  //lighter purple
 //$base01:          #586e75; //darkest gray
 //$base00:          #657b83; //dark gray
 //$base0:           #839496; //medium gray
@@ -46,6 +48,6 @@ $base1:           #93a1a1; //medium light gray
 
 
 /* Non highlighted code colors */
-$pre-bg: $base03;
-$pre-border: darken($base02, 5);
+$pre-bg: $base04;
+$pre-border: darken($base05, 5);
 $pre-color: $base1;

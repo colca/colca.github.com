@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-02-17T17:59:57-08:00</updated>
+  <updated>2014-02-17T18:03:58-08:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -16,29 +16,17 @@
   <entry>
     <title type="html"><![CDATA[Ruby : rescue NoMethodError inside loop]]></title>
     <link href="http://colca.github.com/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop/"/>
-    <updated>2014-02-17T17:50:00-08:00</updated>
+    <updated>2014-02-17T18:03:00-08:00</updated>
     <id>http://colca.github.com/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop</id>
-    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>while condition
-</span><span class='line'> ...
-</span><span class='line'> begin
-</span><span class='line'> meth.call
-</span><span class='line'> rescue NoMethodError 
-</span><span class='line'> puts "NoMethodError is caught"
-</span><span class='line'> next
-</span><span class='line'> end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-
+    <content type="html"><![CDATA[<p>while condition
+ &hellip;
+ begin
+ meth.call
+ rescue NoMethodError
+ puts &ldquo;NoMethodError is caught&rdquo;
+ next
+ end
+end</p>
 ]]></content>
   </entry>
   

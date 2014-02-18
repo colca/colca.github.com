@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-02-17T18:05:27-08:00</updated>
+  <updated>2014-02-17T18:06:46-08:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -18,15 +18,17 @@
     <link href="http://colca.github.com/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop/"/>
     <updated>2014-02-17T18:03:00-08:00</updated>
     <id>http://colca.github.com/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop</id>
-    <content type="html"><![CDATA[<p>while condition
- &hellip;
+    <content type="html"><![CDATA[<p><code>
+while condition
+ ...
  begin
  meth.call
  rescue NoMethodError
- puts &ldquo;NoMethodError is caught&rdquo;
+ puts "NoMethodError is caught"
  next
  end
-end</p>
+end
+</code></p>
 ]]></content>
   </entry>
   

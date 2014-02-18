@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-02-17T18:03:58-08:00</updated>
+  <updated>2014-02-17T18:05:27-08:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://colca.github.com/blog/2014/02/17/test/"/>
+    <updated>2014-02-17T18:05:00-08:00</updated>
+    <id>http://colca.github.com/blog/2014/02/17/test</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby : rescue NoMethodError inside loop]]></title>

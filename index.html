@@ -9,8 +9,17 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Prerequisitive Download java from : http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html 1
-tar xzf jdk-7u51-linux-x64. &hellip;">
+  <meta name="description" content="1
+2
+3
+4
+5
+6
+7
+8
+9
+while condition ... begin meth.call rescue NoMethodError puts "NoMethodError is caught" next end
+end ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +75,62 @@ tar xzf jdk-7u51-linux-x64. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop/">Ruby : Rescue NoMethodError Inside Loop</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-17T17:50:00-08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>while condition
+</span><span class='line'> ...
+</span><span class='line'> begin
+</span><span class='line'> meth.call
+</span><span class='line'> rescue NoMethodError 
+</span><span class='line'> puts "NoMethodError is caught"
+</span><span class='line'> next
+</span><span class='line'> end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1015,6 +1080,10 @@ To solve gbk error with CH character on windows</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop/">Ruby : Rescue NoMethodError Inside Loop</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/09/hadoop-install-hadoop-2-dot-2-0-on-centos/">Hadoop : Install Hadoop 2.2.0 on CentOS</a>
       </li>
     
@@ -1028,10 +1097,6 @@ To solve gbk error with CH character on windows</p>
     
       <li class="post">
         <a href="/blog/2014/01/27/git-undo-a-merge/">Git:revert</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/20/setup-piwik-for-octopress-analytics/">Setup Piwik for Octopress Analytics</a>
       </li>
     
   </ul>

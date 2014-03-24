@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-03-24T15:35:11-07:00</updated>
+  <updated>2014-03-24T15:38:52-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -136,7 +136,7 @@ has_attached_file :pic, :styles =>
       { :medium => &ldquo;300<em>00>&rdquo;, :thumb => &ldquo;100</em>100>&rdquo; }
 end
 ```</p></li>
-<li><p>Views
+<li><p>Views<br>
 Modify form file for new/edit view to enable the file upload
 ```</p>
 
@@ -151,7 +151,7 @@ Modify form file for new/edit view to enable the file upload
 &hellip;
 &lt;% end %>
 ```</p></li>
-<li><p>Controller
+<li><p>Controller<br>
 Permit the parameters
 ```</p>
 

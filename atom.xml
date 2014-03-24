@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-03-24T15:35:11-07:00</updated>
+  <updated>2014-03-24T15:38:52-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -212,7 +212,7 @@ check heroku configuration<br></p>
 
 
 <ul>
-<li>Views
+<li>Views<br>
 Modify form file for new/edit view to enable the file upload</li>
 </ul>
 
@@ -238,7 +238,7 @@ Modify form file for new/edit view to enable the file upload</li>
 
 
 <ul>
-<li>Controller
+<li>Controller<br>
 Permit the parameters</li>
 </ul>
 

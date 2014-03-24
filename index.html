@@ -9,7 +9,7 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="1
+  <meta name="description" content="Create a new s3 bucket, add CORS policy: 1
 2
 3
 4
@@ -18,8 +18,10 @@
 7
 8
 9
-while condition ... begin meth.call rescue NoMethodError puts "NoMethodError is caught" next end
-end ">
+10
+11
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;CORSConfiguration xmlns="http://s3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +77,322 @@ end ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/">Rails: Upload Picture to S3 With Paperclip</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T14:30:00-07:00" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li>Create a new s3 bucket, add CORS policy:<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+</span><span class='line'>&lt;CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"&gt;
+</span><span class='line'>    &lt;CORSRule&gt;
+</span><span class='line'>        &lt;AllowedOrigin&gt;*&lt;/AllowedOrigin&gt;
+</span><span class='line'>        &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
+</span><span class='line'>        &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
+</span><span class='line'>        &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
+</span><span class='line'>        &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
+</span><span class='line'>        &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
+</span><span class='line'>    &lt;/CORSRule&gt;
+</span><span class='line'>&lt;/CORSConfiguration&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Make the s3 bucket as public <br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>  "Version": "2008-10-17",
+</span><span class='line'>  "Statement": [
+</span><span class='line'>      {
+</span><span class='line'>          "Sid": "AllowPublicRead",
+</span><span class='line'>          "Effect": "Allow",
+</span><span class='line'>          "Principal": {
+</span><span class='line'>              "AWS": "*"
+</span><span class='line'>          },
+</span><span class='line'>          "Action": "s3:GetObject",
+</span><span class='line'>          "Resource": "arn:aws:s3:::bucketname/*"
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Edit Gemfile to add following gems<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem 'paperclip', '~&gt;3.5.0'
+</span><span class='line'># 3.5.0 version paperclip works with Rails 4
+</span><span class='line'>gem 'aws-sdk'
+</span><span class='line'>gem 's3_direct_upload'</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Specify AWS configuration variables for production environment<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># config/environments/production.rb
+</span><span class='line'>config.paperclip_defaults = {
+</span><span class='line'>  :storage =&gt; :s3,
+</span><span class='line'>  :s3_credentials =&gt; {
+</span><span class='line'>    :bucket =&gt; ENV['S3_BUCKET_NAME'],
+</span><span class='line'>    :access_key_id =&gt; ENV['AWS_ACCESS_KEY_ID'],
+</span><span class='line'>    :secret_access_key =&gt; ENV['AWS_SECRET_ACCESS_KEY']
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Set AWS configuration variables on heroku app<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku config:set S3_BUCKET_NAME=your_bucket_name
+</span><span class='line'>$ heroku config:set AWS_ACCESS_KEY_ID=your_access_key_id
+</span><span class='line'>$ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+(your aws credentials reside in account->security credentials)<br>
+check heroku configuration<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku config</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Rails update database</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rails g migration AddPicPaperClip</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit migration as below, we are adding four columns to the existing movies table<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class AddPicPaperclip &lt; ActiveRecord::Migration
+</span><span class='line'>  def self.up
+</span><span class='line'>    add_column :movies, :pic_file_name, :string
+</span><span class='line'>    add_column :movies, :pic_content_type, :string
+</span><span class='line'>    add_column :movies, :pic_file_size,    :integer
+</span><span class='line'>    add_column :movies, :pic_updated_at,   :datetime
+</span><span class='line'>  end
+</span><span class='line'>  def self.down
+</span><span class='line'>    remove_column :movies, :pic_file_name
+</span><span class='line'>    remove_column :movies, :pic_content_type
+</span><span class='line'>    remove_column :movies, :pic_file_size
+</span><span class='line'>    remove_column :movies, :pic_updated_at
+</span><span class='line'>  end
+</span><span class='line'>end
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the migration to update the db<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Models</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#app/model/movies.rb
+</span><span class='line'>class Movie &lt; ActiveRecord::Base
+</span><span class='line'>  validates :title, :presence =&gt; true, :uniqueness =&gt; true, :length =&gt; {minimum: 3, too_short: "must have at least %{count} chars"}
+</span><span class='line'>  before_save :capitalize_title
+</span><span class='line'>  has_attached_file :pic, :styles =&gt;
+</span><span class='line'>        { :medium =&gt; "300*300&gt;", :thumb =&gt; "100*100&gt;" }
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Views
+Modify form file for new/edit view to enable the file upload</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#app/view/movies/_form.html.erb
+</span><span class='line'>&lt;%= form_for(@movie, :html =&gt; { :multipart =&gt; true })  do |f| %&gt;
+</span><span class='line'>  ...
+</span><span class='line'>  &lt;p&gt;
+</span><span class='line'>    &lt;%= f.label :pic %&gt;&lt;br/&gt;
+</span><span class='line'>    &lt;%= f.file_field :pic %&gt;
+</span><span class='line'>  &lt;/p&gt;
+</span><span class='line'>  ...
+</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Controller
+Permit the parameters</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#app/controler/movie_controller.rb
+</span><span class='line'> # POST /movies.json
+</span><span class='line'>  def create
+</span><span class='line'>    @movie = Movie.new(movie_params)
+</span><span class='line'>
+</span><span class='line'>    respond_to do |format|
+</span><span class='line'>      if @movie.save
+</span><span class='line'>        format.html { redirect_to @movie, notice: 'Movie ' + @movie.title + ' was successfully created.' }
+</span><span class='line'>        format.json { render action: 'show', status: :created, location: @movie }
+</span><span class='line'>      else
+</span><span class='line'>        format.html { render action: 'new' }
+</span><span class='line'>        format.json { render json: @movie.errors, status: :unprocessable_entity }
+</span><span class='line'>      end
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>   def movie_params 
+</span><span class='line'>#     params.require(:movie).permit(:title, :rating, :description, :release_date) 
+</span><span class='line'>     params.require(:movie).permit! 
+</span><span class='line'>   end </span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Show the uploaded picture</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#show.haml.html
+</span><span class='line'>%h4 Profile Pic:
+</span><span class='line'>  =image_tag @movie.pic.url(:medium)</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -935,139 +1253,9 @@ Postgresql document:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/28/setup-octopress-blog-on-windows-7/">How to Setup Octopress on Windows 7</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-28T14:55:00-07:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Reference:<br>
-<a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a><br>
-<a href="http://evsseny.appspot.com/2012/03/30/Octopress-blog-install.html">http://evsseny.appspot.com/2012/03/30/Octopress-blog-install.html</a><br>
-<a href="http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/">http://geekontheway.github.com/blog/2011/12/03/octopress-for-freshman/</a><br></p>
-
-<p><a href="http://octopress.org/docs/setup/">Setup</a><br>
-1. Install <a href="http://git-scm.com/">Git</a> for Windows, <a href="https://help.github.com/articles/set-up-git">git setup</a> can now be skipped with its new installer<br>
-2. Install Ruby using <a href="http://rubyinstaller.org/">RubyInstaller</a> <br>
-   Install <a href="http://rubyinstaller.org/downloads/">DevKit</a> to enhance installed Ruby<br> (or error will be encountered during rake install caused by compiler missing)<br>
-3. Follow the <a href="http://octopress.org/docs/setup/">Setup Octopress</a> steps <br></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
-</span><span class='line'>ruby --version  # Should report Ruby 1.9.3
-</span><span class='line'>gem install bundler
-</span><span class='line'>bundle install
-</span><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-<a href="http://octopress.org/docs/deploying/github/">Deploy to Github pages</a> <br>
-1. Create a <a href="https://github.com/new">new Github repository</a> named with your user name: yourusername.github.com<br>
-Preview the github page generated by github automatically: Repository->settings->Automatic Page Generator<br>
-2. Continues following the deploying guide<br>
-<a href="https://help.github.com/articles/generating-ssh-keys">Generate a github ssh key</a> first or connection will be denied.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages
-</span><span class='line'>rake generate
-</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-check with</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git status</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-for octopress folder, status should be branch on source; for _deploy folder, status should be branch on master.<br>
-3. Commit the source <br></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git add . 
-</span><span class='line'>git commit -m "first commit"
-</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-Now an uncustomized octopress blog can be visited through your github pages. <br>
-Follow the <a href="http://octopress.org/docs/configuring/">configuration</a> and <a href="http://octopress.org/docs/blogging/">blog</a> to start blogging.<br></p>
-
-<p>To create new post</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["example:subtitle"]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-To preview new post through <a href="http://localhost:4000">http://localhost:4000</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
-</span><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-To deploy new post</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
-</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-To solve gbk error with CH character on windows</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set LC_ALL=en_US.UTF-8
-</span><span class='line'>set LANG=en_US.UTF-8</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1078,6 +1266,10 @@ To solve gbk error with CH character on windows</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/">Rails: Upload Picture to S3 With Paperclip</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop/">Ruby : Rescue NoMethodError Inside Loop</a>
@@ -1093,10 +1285,6 @@ To solve gbk error with CH character on windows</p>
     
       <li class="post">
         <a href="/blog/2014/01/27/octopress-sync-octopress-on-different-machines/">Octopress: Sync Octopress on Different Machines</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/27/git-undo-a-merge/">Git:revert</a>
       </li>
     
   </ul>

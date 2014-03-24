@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-03-24T14:23:52-07:00</updated>
+  <updated>2014-03-24T15:23:17-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,295 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rails: upload picture to s3 with paperclip]]></title>
+    <link href="http://colca.github.com/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/"/>
+    <updated>2014-03-24T14:30:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip</id>
+    <content type="html"><![CDATA[<ol>
+<li>Create a new s3 bucket, add CORS policy:<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+</span><span class='line'>&lt;CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"&gt;
+</span><span class='line'>    &lt;CORSRule&gt;
+</span><span class='line'>        &lt;AllowedOrigin&gt;*&lt;/AllowedOrigin&gt;
+</span><span class='line'>        &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
+</span><span class='line'>        &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
+</span><span class='line'>        &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
+</span><span class='line'>        &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
+</span><span class='line'>        &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
+</span><span class='line'>    &lt;/CORSRule&gt;
+</span><span class='line'>&lt;/CORSConfiguration&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Make the s3 bucket as public <br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>  "Version": "2008-10-17",
+</span><span class='line'>  "Statement": [
+</span><span class='line'>      {
+</span><span class='line'>          "Sid": "AllowPublicRead",
+</span><span class='line'>          "Effect": "Allow",
+</span><span class='line'>          "Principal": {
+</span><span class='line'>              "AWS": "*"
+</span><span class='line'>          },
+</span><span class='line'>          "Action": "s3:GetObject",
+</span><span class='line'>          "Resource": "arn:aws:s3:::bucketname/*"
+</span><span class='line'>      }
+</span><span class='line'>  ]
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Edit Gemfile to add following gems<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Gemfile
+</span><span class='line'>gem 'paperclip', '~&gt;3.5.0'
+</span><span class='line'># 3.5.0 version paperclip works with Rails 4
+</span><span class='line'>gem 'aws-sdk'
+</span><span class='line'>gem 's3_direct_upload'</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Specify AWS configuration variables for production environment<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># config/environments/production.rb
+</span><span class='line'>config.paperclip_defaults = {
+</span><span class='line'>  :storage =&gt; :s3,
+</span><span class='line'>  :s3_credentials =&gt; {
+</span><span class='line'>    :bucket =&gt; ENV['S3_BUCKET_NAME'],
+</span><span class='line'>    :access_key_id =&gt; ENV['AWS_ACCESS_KEY_ID'],
+</span><span class='line'>    :secret_access_key =&gt; ENV['AWS_SECRET_ACCESS_KEY']
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Set AWS configuration variables on heroku app<br></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku config:set S3_BUCKET_NAME=your_bucket_name
+</span><span class='line'>$ heroku config:set AWS_ACCESS_KEY_ID=your_access_key_id
+</span><span class='line'>$ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+(your aws credentials reside in account->security credentials)<br>
+check heroku configuration<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku config</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Rails update database</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rails g migration AddPicPaperClip</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit migration as below, we are adding four columns to the existing movies table<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class AddPicPaperclip &lt; ActiveRecord::Migration
+</span><span class='line'>  def self.up
+</span><span class='line'>    add_column :movies, :pic_file_name, :string
+</span><span class='line'>    add_column :movies, :pic_content_type, :string
+</span><span class='line'>    add_column :movies, :pic_file_size,    :integer
+</span><span class='line'>    add_column :movies, :pic_updated_at,   :datetime
+</span><span class='line'>  end
+</span><span class='line'>  def self.down
+</span><span class='line'>    remove_column :movies, :pic_file_name
+</span><span class='line'>    remove_column :movies, :pic_content_type
+</span><span class='line'>    remove_column :movies, :pic_file_size
+</span><span class='line'>    remove_column :movies, :pic_updated_at
+</span><span class='line'>  end
+</span><span class='line'>end
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the migration to update the db<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Models</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#app/model/movies.rb
+</span><span class='line'>class Movie &lt; ActiveRecord::Base
+</span><span class='line'>  validates :title, :presence =&gt; true, :uniqueness =&gt; true, :length =&gt; {minimum: 3, too_short: "must have at least %{count} chars"}
+</span><span class='line'>  before_save :capitalize_title
+</span><span class='line'>  has_attached_file :pic, :styles =&gt;
+</span><span class='line'>        { :medium =&gt; "300*300&gt;", :thumb =&gt; "100*100&gt;" }
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Views
+Modify form file for new/edit view to enable the file upload</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#app/view/movies/_form.html.erb
+</span><span class='line'>&lt;%= form_for(@movie, :html =&gt; { :multipart =&gt; true })  do |f| %&gt;
+</span><span class='line'>  ...
+</span><span class='line'>  &lt;p&gt;
+</span><span class='line'>    &lt;%= f.label :pic %&gt;&lt;br/&gt;
+</span><span class='line'>    &lt;%= f.file_field :pic %&gt;
+</span><span class='line'>  &lt;/p&gt;
+</span><span class='line'>  ...
+</span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Controller
+Permit the parameters</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#app/controler/movie_controller.rb
+</span><span class='line'> # POST /movies.json
+</span><span class='line'>  def create
+</span><span class='line'>    @movie = Movie.new(movie_params)
+</span><span class='line'>
+</span><span class='line'>    respond_to do |format|
+</span><span class='line'>      if @movie.save
+</span><span class='line'>        format.html { redirect_to @movie, notice: 'Movie ' + @movie.title + ' was successfully created.' }
+</span><span class='line'>        format.json { render action: 'show', status: :created, location: @movie }
+</span><span class='line'>      else
+</span><span class='line'>        format.html { render action: 'new' }
+</span><span class='line'>        format.json { render json: @movie.errors, status: :unprocessable_entity }
+</span><span class='line'>      end
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>   def movie_params 
+</span><span class='line'>#     params.require(:movie).permit(:title, :rating, :description, :release_date) 
+</span><span class='line'>     params.require(:movie).permit! 
+</span><span class='line'>   end </span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Show the uploaded picture</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#show.haml.html
+</span><span class='line'>%h4 Profile Pic:
+</span><span class='line'>  =image_tag @movie.pic.url(:medium)</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby : rescue NoMethodError inside loop]]></title>

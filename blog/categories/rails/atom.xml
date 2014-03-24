@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | KamAcoma]]></title>
+  <link href="http://colca.github.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://colca.github.com/"/>
+  <updated>2014-03-24T15:23:17-07:00</updated>
+  <id>http://colca.github.com/</id>
+  <author>
+    <name><![CDATA[colca]]></name>
+    <email><![CDATA[colca7@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[rails: upload picture to s3 with paperclip]]></title>
+    <link href="http://colca.github.com/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/"/>
+    <updated>2014-03-24T14:30:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip</id>
+    <content type="html"><![CDATA[<ol>
+<li><p>Create a new s3 bucket, add CORS policy:<br>
+<code>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"&gt;
+ &lt;CORSRule&gt;
+     &lt;AllowedOrigin&gt;*&lt;/AllowedOrigin&gt;
+     &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
+     &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
+     &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
+     &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
+     &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
+ &lt;/CORSRule&gt;
+&lt;/CORSConfiguration&gt;
+</code>
+Make the s3 bucket as public <br>
+<code>
+{
+ "Version": "2008-10-17",
+ "Statement": [
+     {
+         "Sid": "AllowPublicRead",
+         "Effect": "Allow",
+         "Principal": {
+             "AWS": "*"
+         },
+         "Action": "s3:GetObject",
+         "Resource": "arn:aws:s3:::bucketname/*"
+     }
+ ]
+}
+</code></p></li>
+<li><p>Edit Gemfile to add following gems<br>
+```</p>
+
+<h1>Gemfile</h1>
+
+gem &lsquo;paperclip&rsquo;, &lsquo;~>3.5.0&rsquo;
+
+<h1>3.5.0 version paperclip works with Rails 4</h1>
+
+<p>gem &lsquo;aws-sdk&rsquo;
+gem &lsquo;s3_direct_upload&rsquo;
+```</p></li>
+<li><p>Specify AWS configuration variables for production environment<br>
+```</p>
+
+<h1>config/environments/production.rb</h1>
+
+<p>config.paperclip_defaults = {
+:storage => :s3,
+:s3_credentials => {
+ :bucket => ENV[&lsquo;S3_BUCKET_NAME&rsquo;],
+ :access_key_id => ENV[&lsquo;AWS_ACCESS_KEY_ID&rsquo;],
+ :secret_access_key => ENV[&lsquo;AWS_SECRET_ACCESS_KEY&rsquo;]
+}
+}
+```</p></li>
+<li><p>Set AWS configuration variables on heroku app<br>
+<code>
+$ heroku config:set S3_BUCKET_NAME=your_bucket_name
+$ heroku config:set AWS_ACCESS_KEY_ID=your_access_key_id
+$ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key
+</code>
+(your aws credentials reside in account->security credentials)<br>
+check heroku configuration<br>
+<code>
+$ heroku config
+</code></p></li>
+<li><p>Rails update database</p></li>
+</ol>
+
+
+<p><code>
+$ rails g migration AddPicPaperClip
+</code>
+Edit migration as below, we are adding four columns to the existing movies table<br>
+```
+class AddPicPaperclip &lt; ActiveRecord::Migration
+  def self.up</p>
+
+<pre><code>add_column :movies, :pic_file_name, :string
+add_column :movies, :pic_content_type, :string
+add_column :movies, :pic_file_size,    :integer
+add_column :movies, :pic_updated_at,   :datetime
+</code></pre>
+
+<p>  end
+  def self.down</p>
+
+<pre><code>remove_column :movies, :pic_file_name
+remove_column :movies, :pic_content_type
+remove_column :movies, :pic_file_size
+remove_column :movies, :pic_updated_at
+</code></pre>
+
+<p>  end
+end</p>
+
+<p><code>
+Run the migration to update the db&lt;br&gt;
+</code>
+$ rake db:migrate
+```</p>
+
+<ol>
+<li><p>Models
+```</p>
+
+<h1>app/model/movies.rb</h1>
+
+<p>class Movie &lt; ActiveRecord::Base
+validates :title, :presence => true, :uniqueness => true, :length => {minimum: 3, too_short: &ldquo;must have at least %{count} chars&rdquo;}
+before_save :capitalize_title
+has_attached_file :pic, :styles =>
+     { :medium => &ldquo;300<em>300>&rdquo;, :thumb => &ldquo;100</em>100>&rdquo; }
+end
+```</p></li>
+<li><p>Views
+Modify form file for new/edit view to enable the file upload
+```</p>
+
+<h1>app/view/movies/_form.html.erb</h1>
+
+<p>&lt;%= form_for(@movie, :html => { :multipart => true })  do |f| %>
+&hellip;
+<p>
+ &lt;%= f.label :pic %><br/>
+ &lt;%= f.file_field :pic %>
+</p>
+&hellip;
+&lt;% end %>
+```</p></li>
+<li><p>Controller
+Permit the parameters
+```</p>
+
+<h1>app/controler/movie_controller.rb</h1>
+
+<h1>POST /movies.json</h1>
+
+<p>def create
+ @movie = Movie.new(movie_params)</p>
+
+<p> respond_to do |format|
+   if @movie.save
+     format.html { redirect_to @movie, notice: &lsquo;Movie &rsquo; + @movie.title + &lsquo; was successfully created.&rsquo; }
+     format.json { render action: &lsquo;show&rsquo;, status: :created, location: @movie }
+   else
+     format.html { render action: &lsquo;new&rsquo; }
+     format.json { render json: @movie.errors, status: :unprocessable_entity }
+   end
+ end
+end</p>
+
+<p> def movie_params</p>
+
+<h1>params.require(:movie).permit(:title, :rating, :description, :release_date)</h1>
+
+<p>   params.require(:movie).permit!
+ end
+```</p></li>
+<li><p>Show the uploaded picture
+```</p>
+
+<h1>show.haml.html</h1>
+
+<p>%h4 Profile Pic:
+=image_tag @movie.pic.url(:medium)
+```</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

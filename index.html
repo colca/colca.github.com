@@ -9,7 +9,7 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Create a new s3 bucket, add CORS policy: 1
+  <meta name="description" content="*. Create a new s3 bucket, add CORS policy: 1
 2
 3
 4
@@ -21,7 +21,7 @@
 10
 11
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;CORSConfiguration xmlns="http://s3 &hellip;">
+&lt;CORSConfiguration xmlns="http:// &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,10 +106,7 @@
   </header>
 
 
-  <div class="entry-content"><ol>
-<li>Create a new s3 bucket, add CORS policy:<br></li>
-</ol>
-
+  <div class="entry-content"><p>*. Create a new s3 bucket, add CORS policy:<br></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -167,10 +164,7 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Edit Gemfile to add following gems<br></li>
-</ol>
-
+<p>*. Edit Gemfile to add following gems<br></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -184,10 +178,7 @@
 </span><span class='line'>gem 's3_direct_upload'</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Specify AWS configuration variables for production environment<br></li>
-</ol>
-
+<p>*. Specify AWS configuration variables for production environment<br></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -209,10 +200,7 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Set AWS configuration variables on heroku app<br></li>
-</ol>
-
+<p>*. Set AWS configuration variables on heroku app<br></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -230,10 +218,7 @@ check heroku configuration<br></p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku config</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Rails update database</li>
-</ol>
-
+<p>*. Rails update database</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ rails g migration AddPicPaperClip</span></code></pre></td></tr></table></div></figure>
@@ -278,10 +263,7 @@ check heroku configuration<br></p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ rake db:migrate</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Models</li>
-</ol>
-
+<p>*. Models</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -299,11 +281,8 @@ check heroku configuration<br></p>
 </span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Views
-Modify form file for new/edit view to enable the file upload</li>
-</ol>
-
+<p>*. Views
+Modify form file for new/edit view to enable the file upload</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -325,11 +304,8 @@ Modify form file for new/edit view to enable the file upload</li>
 </span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Controller
-Permit the parameters</li>
-</ol>
-
+<p>*. Controller
+Permit the parameters</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -373,10 +349,7 @@ Permit the parameters</li>
 </span><span class='line'>   end </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>Show the uploaded picture</li>
-</ol>
-
+<p>*. Show the uploaded picture</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -386,7 +359,9 @@ Permit the parameters</li>
 </span><span class='line'>  =image_tag @movie.pic.url(:medium)</span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>sources:
+<a href="https://devcenter.heroku.com/articles/paperclip-s3">https://devcenter.heroku.com/articles/paperclip-s3</a><br>
+<a href="http://www.blitztheory.com/category/tutorials/">http://www.blitztheory.com/category/tutorials/</a><br></p>
 </div>
   
   

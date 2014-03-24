@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-03-24T15:31:57-07:00</updated>
+  <updated>2014-03-24T15:33:07-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -18,7 +18,10 @@
     <link href="http://colca.github.com/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/"/>
     <updated>2014-03-24T14:30:00-07:00</updated>
     <id>http://colca.github.com/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip</id>
-    <content type="html"><![CDATA[<p>*. Create a new s3 bucket, add CORS policy:<br></p>
+    <content type="html"><![CDATA[<ul>
+<li>Create a new s3 bucket, add CORS policy:<br></li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -34,12 +37,12 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 </span><span class='line'>&lt;CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"&gt;
 </span><span class='line'>    &lt;CORSRule&gt;
-</span><span class='line'>        &lt;AllowedOrigin&gt;*&lt;/AllowedOrigin&gt;
+</span><span class='line'>        &lt;AllowedOrigin&gt;*/AllowedOrigin&gt;
 </span><span class='line'>        &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;
 </span><span class='line'>        &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
 </span><span class='line'>        &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
 </span><span class='line'>        &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
-</span><span class='line'>        &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
+</span><span class='line'>        &lt;AllowedHeader&gt;*/AllowedHeader&gt;
 </span><span class='line'>    &lt;/CORSRule&gt;
 </span><span class='line'>&lt;/CORSConfiguration&gt;</span></code></pre></td></tr></table></div></figure>
 
@@ -67,16 +70,19 @@
 </span><span class='line'>          "Sid": "AllowPublicRead",
 </span><span class='line'>          "Effect": "Allow",
 </span><span class='line'>          "Principal": {
-</span><span class='line'>              "AWS": "*"
+</span><span class='line'>              "AWS": "*
 </span><span class='line'>          },
 </span><span class='line'>          "Action": "s3:GetObject",
-</span><span class='line'>          "Resource": "arn:aws:s3:::bucketname/*"
+</span><span class='line'>          "Resource": "arn:aws:s3:::bucketname/*
 </span><span class='line'>      }
 </span><span class='line'>  ]
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Edit Gemfile to add following gems<br></p>
+<ul>
+<li>Edit Gemfile to add following gems<br></li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -90,7 +96,10 @@
 </span><span class='line'>gem 's3_direct_upload'</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Specify AWS configuration variables for production environment<br></p>
+<ul>
+<li>Specify AWS configuration variables for production environment<br></li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -112,7 +121,10 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Set AWS configuration variables on heroku app<br></p>
+<ul>
+<li>Set AWS configuration variables on heroku app<br></li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -130,7 +142,10 @@ check heroku configuration<br></p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku config</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Rails update database</p>
+<ul>
+<li>Rails update database</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ rails g migration AddPicPaperClip</span></code></pre></td></tr></table></div></figure>
@@ -175,7 +190,10 @@ check heroku configuration<br></p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ rake db:migrate</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Models</p>
+<ul>
+<li>Models</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -189,12 +207,15 @@ check heroku configuration<br></p>
 </span><span class='line'>  validates :title, :presence =&gt; true, :uniqueness =&gt; true, :length =&gt; {minimum: 3, too_short: "must have at least %{count} chars"}
 </span><span class='line'>  before_save :capitalize_title
 </span><span class='line'>  has_attached_file :pic, :styles =&gt;
-</span><span class='line'>        { :medium =&gt; "300*300&gt;", :thumb =&gt; "100*100&gt;" }
+</span><span class='line'>        { :medium =&gt; "300*00&gt;", :thumb =&gt; "100*100&gt;" }
 </span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Views
-Modify form file for new/edit view to enable the file upload</p>
+<ul>
+<li>Views
+Modify form file for new/edit view to enable the file upload</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -216,8 +237,11 @@ Modify form file for new/edit view to enable the file upload</p>
 </span><span class='line'>&lt;% end %&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Controller
-Permit the parameters</p>
+<ul>
+<li>Controller
+Permit the parameters</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -261,7 +285,10 @@ Permit the parameters</p>
 </span><span class='line'>   end </span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Show the uploaded picture</p>
+<ul>
+<li>Show the uploaded picture</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

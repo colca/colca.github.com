@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-03-24T15:33:07-07:00</updated>
+  <updated>2014-03-24T15:35:11-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -188,6 +188,12 @@ end</p>
 <p>%h4 Profile Pic:
 =image_tag @movie.pic.url(:medium)
 ```</p></li>
+<li><p>Push to Heroku
+<code>
+$ git push
+$ git push heroku master
+$ heroku run rake db:migrate
+</code></p></li>
 </ul>
 
 

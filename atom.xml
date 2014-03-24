@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-03-24T15:33:07-07:00</updated>
+  <updated>2014-03-24T15:35:11-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -296,6 +296,19 @@ Permit the parameters</li>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#show.haml.html
 </span><span class='line'>%h4 Profile Pic:
 </span><span class='line'>  =image_tag @movie.pic.url(:medium)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Push to Heroku</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push
+</span><span class='line'>$ git push heroku master
+</span><span class='line'>$ heroku run rake db:migrate</span></code></pre></td></tr></table></div></figure>
 
 
 <p>sources:

@@ -5,19 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress: sync octopress on different machines - KamAcoma</title>
+  <title>Linux : check Linux OS version - KamAcoma</title>
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="1.Follow normal setup process 1
-2
-3
-4
-5
-6
-7
-git clone git://github.com/imathis/octopress.git octopress
-cd octopress # If you use RVM, You'll be asked &hellip;">
+  <meta name="description" content="1
+getconf LONG_BIT ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +19,7 @@ cd octopress # If you use RVM, You'll be asked &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://colca.github.com/blog/2014/01/27/octopress-sync-octopress-on-different-machines">
+  <link rel="canonical" href="http://colca.github.com/blog/2014/02/04/linux-check-linux-os-version">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KamAcoma" type="application/atom+xml">
@@ -76,7 +69,7 @@ cd octopress # If you use RVM, You'll be asked &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Octopress: Sync Octopress on Different Machines</h1>
+      <h1 class="entry-title">Linux : Check Linux OS Version</h1>
     
     
       <p class="meta">
@@ -92,46 +85,16 @@ cd octopress # If you use RVM, You'll be asked &hellip;">
   
 
 
-<time datetime="2014-01-27T07:28:00-08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
+<time datetime="2014-02-04T18:22:00-08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>1.Follow normal setup process</p>
+<div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>getconf LONG_BIT</span></code></pre></td></tr></table></div></figure>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
-</span><span class='line'>ruby --version  # Should report Ruby 1.9.3
-</span><span class='line'>gem install bundler
-</span><span class='line'>bundle install
-</span><span class='line'>rake install
-</span><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>2.Pull latest updates from remote branch to sync new machine with latest octopress</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress\
-</span><span class='line'>git pull origin source
-</span><span class='line'>cd _deploy
-</span><span class='line'>git pull origin master</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you can use rake to deploy new blogs from another machine!</p>
 </div>
 
 
@@ -154,15 +117,21 @@ cd octopress # If you use RVM, You'll be asked &hellip;">
   
 
 
-<time datetime="2014-01-27T07:28:00-08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
+<time datetime="2014-02-04T18:22:00-08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>Linux</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2014/01/27/octopress-sync-octopress-on-different-machines/" data-via="" data-counturl="http://colca.github.com/blog/2014/01/27/octopress-sync-octopress-on-different-machines/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2014/02/04/linux-check-linux-os-version/" data-via="" data-counturl="http://colca.github.com/blog/2014/02/04/linux-check-linux-os-version/" >Tweet</a>
   
   
   
@@ -171,10 +140,10 @@ cd octopress # If you use RVM, You'll be asked &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/27/git-undo-a-merge/" title="Previous Post: git:revert">&laquo; git:revert</a>
+        <a class="basic-alignment left" href="/blog/2014/01/27/octopress-sync-octopress-on-different-machines/" title="Previous Post: Octopress: sync octopress on different machines">&laquo; Octopress: sync octopress on different machines</a>
       
       
-        <a class="basic-alignment right" href="/blog/2014/02/04/linux-check-linux-os-version/" title="Next Post: Linux : check Linux OS version">Linux : check Linux OS version &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/02/09/hadoop-install-hadoop-2-dot-2-0-on-centos/" title="Next Post: Hadoop : Install Hadoop 2.2.0 on CentOS">Hadoop : Install Hadoop 2.2.0 on CentOS &raquo;</a>
       
     </p>
   </footer>

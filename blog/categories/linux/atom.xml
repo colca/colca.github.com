@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | KamAcoma]]></title>
+  <link href="http://colca.github.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://colca.github.com/"/>
+  <updated>2014-02-17T18:08:07-08:00</updated>
+  <id>http://colca.github.com/</id>
+  <author>
+    <name><![CDATA[colca]]></name>
+    <email><![CDATA[colca7@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linux : check Linux OS version]]></title>
+    <link href="http://colca.github.com/blog/2014/02/04/linux-check-linux-os-version/"/>
+    <updated>2014-02-04T18:22:00-08:00</updated>
+    <id>http://colca.github.com/blog/2014/02/04/linux-check-linux-os-version</id>
+    <content type="html"><![CDATA[<p><code>
+getconf LONG_BIT
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

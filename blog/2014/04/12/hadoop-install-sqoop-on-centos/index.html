@@ -5,18 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Vi: format code - KamAcoma</title>
+  <title>Hadoop: Install Sqoop on centos - KamAcoma</title>
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="1
-2
-3
-4
-gg
-Shift+v
-Shift+g
-= ">
+  <meta name="description" content="Apache Sqoop Page: http://sqoop.apache.org/ My Hadoop Version : 2.2.0
+Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz Download Sqoop and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +19,7 @@ Shift+g
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://colca.github.com/blog/2013/04/13/how-to-format-code-in-vim">
+  <link rel="canonical" href="http://colca.github.com/blog/2014/04/12/hadoop-install-sqoop-on-centos">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KamAcoma" type="application/atom+xml">
@@ -75,7 +69,7 @@ Shift+g
   
   <header>
     
-      <h1 class="entry-title">Vi: Format Code</h1>
+      <h1 class="entry-title">Hadoop: Install Sqoop on Centos</h1>
     
     
       <p class="meta">
@@ -91,21 +85,97 @@ Shift+g
   
 
 
-<time datetime="2013-04-13T00:28:00-07:00" pubdate data-updated="true">Apr 13<span>th</span>, 2013</time>
+<time datetime="2014-04-12T22:40:00-07:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="entry-content"><p>Apache Sqoop Page: <a href="http://sqoop.apache.org/">http://sqoop.apache.org/</a> <br></p>
+
+<p>My Hadoop Version : 2.2.0
+Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz</p>
+
+<ol type="a">
+<li>Download Sqoop and Unzip</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$tar -xvf sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz 
+</span><span class='line'>$mv sqoop-1.4.4 /usr/lib/sqoop</span></code></pre></td></tr></table></div></figure>
+
+
+<ol type="a">
+<li>Config bash</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gg
-</span><span class='line'>Shift+v
-</span><span class='line'>Shift+g
-</span><span class='line'>=</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi ~/.bashrc
+</span><span class='line'>#add content
+</span><span class='line'>export SQOOP_HOME=/usr/lib/sqoop
+</span><span class='line'>export PATH=$SQOOP_HOME/bin:$PATH</span></code></pre></td></tr></table></div></figure>
+
+
+<ol type="a">
+<li>Config Sqoop</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$cd $SQOOP_HOME/conf
+</span><span class='line'>$mv sqoop-env-template.sh sqoop-env.sh
+</span><span class='line'>$vi sqoop-env.sh
+</span><span class='line'>#edit content
+</span><span class='line'>export HADOOP_COMMON_HOME=/usr/local/hadoop
+</span><span class='line'>export HADOOP_MAPRED_HOME=/usr/local/hadoop</span></code></pre></td></tr></table></div></figure>
+
+
+<ol type="a">
+<li>Download and unzip MySql dirver lib file: mysql-connector-java-5.1.30.tar.gz</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$cp  mysql-connector-java-5.1.30-bin.jar /usr/lib/sqoop/lib</span></code></pre></td></tr></table></div></figure>
+
+
+<ol type="a">
+<li>Test</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$mysql -u root -p
+</span><span class='line'>mysql&gt; create database mydemo;
+</span><span class='line'>mysql&gt; use mydemo;
+</span><span class='line'>mysql&gt; create table wordcount ( word char(36) not null primary key, n int) DEFAULT CHARSET=utf8;
+</span><span class='line'>mysql&gt; exit
+</span><span class='line'>
+</span><span class='line'>#export by sqoop from hdfs file to mysql
+</span><span class='line'>$sqoop export --connect jdbc:mysql://localhost/mydemo \
+</span><span class='line'>--table wordcount --export-dir /user/hduser/HF.out \
+</span><span class='line'>--fields-terminated-by '\t' --username root --password &lt;password&gt;</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -129,12 +199,12 @@ Shift+g
   
 
 
-<time datetime="2013-04-13T00:28:00-07:00" pubdate data-updated="true">Apr 13<span>th</span>, 2013</time>
+<time datetime="2014-04-12T22:40:00-07:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/unix/'>unix</a>
+    <a class='category' href='/blog/categories/hadoop/'>Hadoop</a>
   
 </span>
 
@@ -143,7 +213,7 @@ Shift+g
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2013/04/13/how-to-format-code-in-vim/" data-via="" data-counturl="http://colca.github.com/blog/2013/04/13/how-to-format-code-in-vim/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2014/04/12/hadoop-install-sqoop-on-centos/" data-via="" data-counturl="http://colca.github.com/blog/2014/04/12/hadoop-install-sqoop-on-centos/" >Tweet</a>
   
   
   
@@ -152,10 +222,8 @@ Shift+g
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/03/31/outdoor-trails/" title="Previous Post: Outdoor trails">&laquo; Outdoor trails</a>
+        <a class="basic-alignment left" href="/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/" title="Previous Post: rails: upload picture to s3 with paperclip">&laquo; rails: upload picture to s3 with paperclip</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/09/17/setup-postgresql/" title="Next Post: Setup Postgresql for Rails Project">Setup Postgresql for Rails Project &raquo;</a>
       
     </p>
   </footer>

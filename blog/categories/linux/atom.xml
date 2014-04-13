@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-03-24T15:38:52-07:00</updated>
+  <updated>2014-04-12T22:57:48-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux : get file count and total size]]></title>
+    <link href="http://colca.github.com/blog/2014/02/20/linux-get-file-count-and-total-size/"/>
+    <updated>2014-02-20T08:26:00-08:00</updated>
+    <id>http://colca.github.com/blog/2014/02/20/linux-get-file-count-and-total-size</id>
+    <content type="html"><![CDATA[<p>```
+find . -type f | wc -l
+find ./ -type f | wc -l
+ls -l | wc -l
+du -h
+du -xs</p>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux : check Linux OS version]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-12T22:57:48-07:00</updated>
+  <updated>2014-04-12T23:00:06-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -20,13 +20,10 @@
     <id>http://colca.github.com/blog/2014/04/12/hadoop-install-sqoop-on-centos</id>
     <content type="html"><![CDATA[<p>Apache Sqoop Page: <a href="http://sqoop.apache.org/">http://sqoop.apache.org/</a> <br></p>
 
-<p>My Hadoop Version : 2.2.0
-Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz</p>
+<p>My Hadoop Version : 2.2.0<br>
+Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz<br></p>
 
-<ol type="a">
-<li>Download Sqoop and Unzip</li>
-</ol>
-
+<p>*. Download Sqoop and Unzip</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -34,10 +31,7 @@ Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz</p>
 </span><span class='line'>$mv sqoop-1.4.4 /usr/lib/sqoop</span></code></pre></td></tr></table></div></figure>
 
 
-<ol type="a">
-<li>Config bash</li>
-</ol>
-
+<p>*. Config bash</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -49,10 +43,7 @@ Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz</p>
 </span><span class='line'>export PATH=$SQOOP_HOME/bin:$PATH</span></code></pre></td></tr></table></div></figure>
 
 
-<ol type="a">
-<li>Config Sqoop</li>
-</ol>
-
+<p>*. Config Sqoop</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -68,41 +59,26 @@ Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz</p>
 </span><span class='line'>export HADOOP_MAPRED_HOME=/usr/local/hadoop</span></code></pre></td></tr></table></div></figure>
 
 
-<ol type="a">
-<li>Download and unzip MySql dirver lib file: mysql-connector-java-5.1.30.tar.gz</li>
-</ol>
-
+<p>*. Download and unzip MySql dirver lib file: mysql-connector-java-5.1.30.tar.gz</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$cp  mysql-connector-java-5.1.30-bin.jar /usr/lib/sqoop/lib</span></code></pre></td></tr></table></div></figure>
 
 
-<ol type="a">
-<li>Test</li>
-</ol>
+<p>*. Test
+&#8220;`
+$mysql -u root -p
+mysql> create database mydemo;
+mysql> use mydemo;
+mysql> create table wordcount ( word char(36) not null primary key, n int) DEFAULT CHARSET=utf8;
+mysql> exit</p>
 
+<h1>export by sqoop from hdfs file to mysql</h1>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$mysql -u root -p
-</span><span class='line'>mysql&gt; create database mydemo;
-</span><span class='line'>mysql&gt; use mydemo;
-</span><span class='line'>mysql&gt; create table wordcount ( word char(36) not null primary key, n int) DEFAULT CHARSET=utf8;
-</span><span class='line'>mysql&gt; exit
-</span><span class='line'>
-</span><span class='line'>#export by sqoop from hdfs file to mysql
-</span><span class='line'>$sqoop export --connect jdbc:mysql://localhost/mydemo \
-</span><span class='line'>--table wordcount --export-dir /user/hduser/HF.out \
-</span><span class='line'>--fields-terminated-by '\t' --username root --password &lt;password&gt;</span></code></pre></td></tr></table></div></figure>
-
+<p>$sqoop export &mdash;connect jdbc:mysql://localhost/mydemo \
+&mdash;table wordcount &mdash;export-dir /user/hduser/HF.out \
+&mdash;fields-terminated-by &lsquo;\t&rsquo; &mdash;username root &mdash;password <password>
+F&#8220;`</p>
 ]]></content>
   </entry>
   

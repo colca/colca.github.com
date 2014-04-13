@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-12T23:00:06-07:00</updated>
+  <updated>2014-04-12T23:01:11-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -23,7 +23,10 @@
 <p>My Hadoop Version : 2.2.0<br>
 Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz<br></p>
 
-<p>*. Download Sqoop and Unzip</p>
+<ul>
+<li>Download Sqoop and Unzip</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -31,7 +34,10 @@ Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz<br></p>
 </span><span class='line'>$mv sqoop-1.4.4 /usr/lib/sqoop</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Config bash</p>
+<ul>
+<li>Config bash</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -43,7 +49,10 @@ Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz<br></p>
 </span><span class='line'>export PATH=$SQOOP_HOME/bin:$PATH</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Config Sqoop</p>
+<ul>
+<li>Config Sqoop</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -59,19 +68,25 @@ Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz<br></p>
 </span><span class='line'>export HADOOP_MAPRED_HOME=/usr/local/hadoop</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Download and unzip MySql dirver lib file: mysql-connector-java-5.1.30.tar.gz</p>
+<ul>
+<li>Download and unzip MySql dirver lib file: mysql-connector-java-5.1.30.tar.gz</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$cp  mysql-connector-java-5.1.30-bin.jar /usr/lib/sqoop/lib</span></code></pre></td></tr></table></div></figure>
 
 
-<p>*. Test
+<ul>
+<li>Test
 &#8220;`
 $mysql -u root -p
 mysql> create database mydemo;
 mysql> use mydemo;
 mysql> create table wordcount ( word char(36) not null primary key, n int) DEFAULT CHARSET=utf8;
-mysql> exit</p>
+mysql> exit</li>
+</ul>
+
 
 <h1>export by sqoop from hdfs file to mysql</h1>
 

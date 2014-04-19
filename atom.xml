@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-18T17:51:52-07:00</updated>
+  <updated>2014-04-18T17:58:15-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -19,7 +19,7 @@
     <updated>2014-04-18T17:31:00-07:00</updated>
     <id>http://colca.github.com/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore</id>
     <content type="html"><![CDATA[<ul>
-<li>[Install PostgreSQL] (#)</li>
+<li>[Install PostgreSQL] <a href="http://colca7.com/blog/2014/04/18/install-postgresql-on-centos/"></li>
 </ul>
 
 ]]></content>

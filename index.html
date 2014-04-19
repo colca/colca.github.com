@@ -9,9 +9,8 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Install and start PostgreSQL
-configure YUM repository /etc/yum.repos.d/CentOS-Base.repo, [base]&amp;[update] sections, append line: 1
-exclude= &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,7 +72,43 @@ exclude= &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/">Install PostgreSQL on CentOS</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore/">Hive: Configure PostgreSQL as Hive Metastore</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-18T17:31:00-07:00" pubdate data-updated="true">Apr 18<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/18/install-postgresql-on-centos/">Install PostgreSQL on CentOS</a></h1>
     
     
       <p class="meta">
@@ -97,7 +132,6 @@ exclude= &hellip;">
 
 
   <div class="entry-content"><ul>
-<li>Install and start PostgreSQL<br></li>
 <li>configure YUM repository<br></li>
 </ul>
 
@@ -1195,72 +1229,6 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/27/git-undo-a-merge/">Git:revert</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-27T07:22:00-08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>To view git commit info: </br></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git log</span></code></pre></td></tr></table></div></figure>
-
-
-<p>press q to exit log navigation </br>
-</br>
-Reset using commit-sha or numbers: </br></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard commit_sha
-</span><span class='line'>
-</span><span class='line'>git reset --hard HEAD~5</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Use gitk for details of commit info: </br></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gitk HEAD @{u}
-</span><span class='line'>
-</span><span class='line'>gitk</span></code></pre></td></tr></table></div></figure>
-
-
-<p>from: </br>
-<a href="http://stackoverflow.com/questions/2389361/undo-a-git-merge">http://stackoverflow.com/questions/2389361/undo-a-git-merge</a>
-<a href="http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not">http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1276,7 +1244,11 @@ Reset using commit-sha or numbers: </br></p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/">Install PostgreSQL on CentOS</a>
+        <a href="/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore/">Hive: Configure PostgreSQL as Hive Metastore</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/18/install-postgresql-on-centos/">Install PostgreSQL on CentOS</a>
       </li>
     
       <li class="post">
@@ -1289,10 +1261,6 @@ Reset using commit-sha or numbers: </br></p>
     
       <li class="post">
         <a href="/blog/2014/03/08/hadoop-subprocess-failed-with-code-1/">Hadoop:subprocess Failed With Code 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/20/linux-get-file-count-and-total-size/">Linux : Get File Count and Total Size</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PostgreSQL | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/postgresql/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-18T17:28:40-07:00</updated>
+  <updated>2014-04-18T17:39:06-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -15,11 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Install PostgreSQL on CentOS]]></title>
-    <link href="http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/"/>
+    <link href="http://colca.github.com/blog/2014/04/18/install-postgresql-on-centos/"/>
     <updated>2014-04-18T01:11:00-07:00</updated>
-    <id>http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql</id>
+    <id>http://colca.github.com/blog/2014/04/18/install-postgresql-on-centos</id>
     <content type="html"><![CDATA[<ul>
-<li>Install and start PostgreSQL<br></li>
 <li>configure YUM repository<br></li>
 </ul>
 

@@ -9,8 +9,11 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Install Piwik on Ubunto 12.04 Cloud Server
-Instruction Details: https://www.digitalocean.com/community/articles/how-to-install-piwik-on-an-ubuntu-12 &hellip;">
+  <meta name="description" content="To view git commit info: 1
+git log press q to exit log navigation Reset using commit-sha or numbers: 1
+2
+3
+git reset --hard commit_sha git reset -- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +69,72 @@ Instruction Details: https://www.digitalocean.com/community/articles/how-to-inst
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/27/git-undo-a-merge/">Git:revert</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-27T07:22:00-08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>To view git commit info: </br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git log</span></code></pre></td></tr></table></div></figure>
+
+
+<p>press q to exit log navigation </br>
+</br>
+Reset using commit-sha or numbers: </br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --hard commit_sha
+</span><span class='line'>
+</span><span class='line'>git reset --hard HEAD~5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use gitk for details of commit info: </br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gitk HEAD @{u}
+</span><span class='line'>
+</span><span class='line'>gitk</span></code></pre></td></tr></table></div></figure>
+
+
+<p>from: </br>
+<a href="http://stackoverflow.com/questions/2389361/undo-a-git-merge">http://stackoverflow.com/questions/2389361/undo-a-git-merge</a>
+<a href="http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not">http://stackoverflow.com/questions/12650261/git-says-local-branch-is-behind-remote-branch-but-its-not</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -515,7 +584,11 @@ To solve gbk error with CH character on windows</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/">Install PostgreSQL on CentOS</a>
+        <a href="/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore/">Hive: Configure PostgreSQL as Hive Metastore</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/18/install-postgresql-on-centos/">Install PostgreSQL on CentOS</a>
       </li>
     
       <li class="post">
@@ -528,10 +601,6 @@ To solve gbk error with CH character on windows</p>
     
       <li class="post">
         <a href="/blog/2014/03/08/hadoop-subprocess-failed-with-code-1/">Hadoop:subprocess Failed With Code 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/20/linux-get-file-count-and-total-size/">Linux : Get File Count and Total Size</a>
       </li>
     
   </ul>

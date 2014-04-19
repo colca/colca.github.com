@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: PostgreSQL | KamAcoma]]></title>
+  <link href="http://colca.github.com/blog/categories/postgresql/atom.xml" rel="self"/>
+  <link href="http://colca.github.com/"/>
+  <updated>2014-04-18T17:28:40-07:00</updated>
+  <id>http://colca.github.com/</id>
+  <author>
+    <name><![CDATA[colca]]></name>
+    <email><![CDATA[colca7@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install PostgreSQL on CentOS]]></title>
+    <link href="http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/"/>
+    <updated>2014-04-18T01:11:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql</id>
+    <content type="html"><![CDATA[<ul>
+<li>Install and start PostgreSQL<br></li>
+<li>configure YUM repository<br></li>
+</ul>
+
+
+<p>/etc/yum.repos.d/CentOS-Base.repo, [base]&amp;[update] sections, append line:<br>
+<code>
+exclude=postgresql*
+</code>
++ download and install RPM <br>
+view  <a href="http://yum.postgresql.org">http://yum.postgresql.org</a> to find correct RPM
+<code>
+$curl -O http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+$rpm -ivh pgdg-centos93-9.3.1.noarch.rpm
+</code>
++ install PostgreSql
+<code>
+$yum list postgres*
+$yum install postgresql193-server
+</code>
++ initialize (only need once)
+<code>
+$service postgresql-9.3 initdb
+</code>
+configure postgresql to automatic start when OS starts:
+<code>
+$chkconfig postgresql-9.3 on
+</code>
++ control service
+<code>
+$service postgresql-9.3 start
+$service postgresql-9.3 restart
+$service postgresql-9.3 stop
+$service postgresql-9.3 reload #reload pg_hba.conf while keep db running
+</code></p>
+
+<p>source: <a href="https://wiki.postgresql.org/wiki/YUM_Installation">https://wiki.postgresql.org/wiki/YUM_Installation</a><br></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-12T23:02:12-07:00</updated>
+  <updated>2014-04-18T17:28:40-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Install PostgreSQL on CentOS]]></title>
+    <link href="http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/"/>
+    <updated>2014-04-18T01:11:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql</id>
+    <content type="html"><![CDATA[<ul>
+<li>Install and start PostgreSQL<br></li>
+<li>configure YUM repository<br></li>
+</ul>
+
+
+<p>/etc/yum.repos.d/CentOS-Base.repo, [base]&amp;[update] sections, append line:<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>exclude=postgresql*</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>download and install RPM <br>
+view  <a href="http://yum.postgresql.org">http://yum.postgresql.org</a> to find correct RPM</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$curl -O http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+</span><span class='line'>$rpm -ivh pgdg-centos93-9.3.1.noarch.rpm</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>install PostgreSql</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$yum list postgres*
+</span><span class='line'>$yum install postgresql193-server</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>initialize (only need once)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$service postgresql-9.3 initdb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>configure postgresql to automatic start when OS starts:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$chkconfig postgresql-9.3 on</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>control service</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$service postgresql-9.3 start
+</span><span class='line'>$service postgresql-9.3 restart
+</span><span class='line'>$service postgresql-9.3 stop
+</span><span class='line'>$service postgresql-9.3 reload #reload pg_hba.conf while keep db running</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source: <a href="https://wiki.postgresql.org/wiki/YUM_Installation">https://wiki.postgresql.org/wiki/YUM_Installation</a><br></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hadoop: Install Sqoop on centos]]></title>

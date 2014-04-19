@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Outdoor trails - KamAcoma</title>
+  <title>Install PostgreSQL on CentOS - KamAcoma</title>
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="2005 – 2011 Involved in first outdoor activity on 2005, did a lot of 2-days trails in Zhejiang, Jiangxi, Shanxi and other provinces of China during &hellip;">
+  <meta name="description" content="Install and start PostgreSQL
+configure YUM repository /etc/yum.repos.d/CentOS-Base.repo, [base]&amp;[update] sections, append line: 1
+exclude= &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://colca.github.com/blog/2013/03/31/outdoor-trails">
+  <link rel="canonical" href="http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KamAcoma" type="application/atom+xml">
@@ -68,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Outdoor Trails</h1>
+      <h1 class="entry-title">Install PostgreSQL on CentOS</h1>
     
     
       <p class="meta">
@@ -84,46 +86,79 @@
   
 
 
-<time datetime="2013-03-31T20:51:00-07:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time>
+<time datetime="2014-04-18T01:11:00-07:00" pubdate data-updated="true">Apr 18<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>2005 – 2011 <br></h2>
+<div class="entry-content"><ul>
+<li>Install and start PostgreSQL<br></li>
+<li>configure YUM repository<br></li>
+</ul>
 
-<p>Involved in first outdoor activity on 2005, did a lot of 2-days trails in Zhejiang, Jiangxi, Shanxi  and other provinces of China during weekends and holidays, most of the trails are to climb mountains with height between 1400 to 1800m (4600-5900feet). Typical routine is 1 or 2 day camping plus 2 or 3 day hiking.<br></p>
 
-<h2>Oct 2006   Taibai Mountain, Shanxi Province, China (3767m)<br></h2>
+<p>/etc/yum.repos.d/CentOS-Base.repo, [base]&amp;[update] sections, append line:<br></p>
 
-<p>4 day hiking with a 30 size team; experienced a diverse environment where middle temperature climate and alpine climate can be found in same area, with glacial remnants from Quaternary Glacier. <br>
-<a href="http://en.wikipedia.org/wiki/Mount_Taibai">http://en.wikipedia.org/wiki/Mount_Taibai</a><br></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>exclude=postgresql*</span></code></pre></td></tr></table></div></figure>
 
-<h2>Oct 2007  Fairy Lake, Sichuan Province, China (4125m)<br></h2>
 
-<p>4 day hiking in an unexploited scene in Tibetan region of Sichuan province, with 5 teammates; it’s the most beautiful and mysterious alpine lake I’ve visited.
-<a href="http://flickrhivemind.net/Tags/jiulong/Interesting">http://flickrhivemind.net/Tags/jiulong/Interesting</a><br></p>
+<ul>
+<li>download and install RPM <br>
+view  <a href="http://yum.postgresql.org">http://yum.postgresql.org</a> to find correct RPM</li>
+</ul>
 
-<h2>Oct 2008   Motuo, Tibet, China (1225-4170m)<br></h2>
 
-<p>4 day trekking to the last untouched country in China, with 5 teammates; Motuo is called “hidden lotus” as its mysterious location and isolation with outside world.  You can experience mountains above 4000m, waterfall, the turbulent Brahmaputra River, and sharp altitude falling to 800m in this one trekking trail with endless accompany of thrilling leeches. <br>
-<a href="http://www.tibettravel.org/trekking-tibet/trek-to-motuo.html">http://www.tibettravel.org/trekking-tibet/trek-to-motuo.html</a><br></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$curl -O http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+</span><span class='line'>$rpm -ivh pgdg-centos93-9.3.1.noarch.rpm</span></code></pre></td></tr></table></div></figure>
 
-<h2>Oct 2009  Erfeng(peak of the 2nd  sister) Four  Sister Mountain, Sichuan, China(5276m)<br></h2>
 
-<p>2 day trekking and climbing to the second highest mountain of Siguniang Moutain(Four Sister Mountain), we made it to less than 100m to the peak of the mountain due to the big snow. <br>
-<a href="http://wikitravel.org/en/Siguniangshan_National_Parks">http://wikitravel.org/en/Siguniangshan_National_Parks</a><br></p>
+<ul>
+<li>install PostgreSql</li>
+</ul>
 
-<h2>Oct 2010   Genie Mountain, Sichuan, China (3700-4150m)<br></h2>
 
-<p>4 day trekking in area of Genie Mountain; enjoyed the beautiful scene of snow mountain, turquoise alpine lakes and time-honored Tibetan temples. <br>
-<a href="http://en.wikipedia.org/wiki/Grid_Nie_Mountain">http://en.wikipedia.org/wiki/Grid_Nie_Mountain</a><br></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$yum list postgres*
+</span><span class='line'>$yum install postgresql193-server</span></code></pre></td></tr></table></div></figure>
 
-<h2>Oct 2012   Qizanggou Valley Trail, Sichuan, China (3100-4200m)<br></h2>
 
-<p>4 day trekking and horse trekking trail to unexploited holy Tibetan Mountains and Holy lake deep in the valley where Tibetans pray and do the ceremonies. <br>
-<a href="http://www.facebook.com/media/set/?set=a.4136213717990.2161159.1062998436&amp;type=3">http://www.facebook.com/media/set/?set=a.4136213717990.2161159.1062998436&amp;type=3</a><br></p>
+<ul>
+<li>initialize (only need once)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$service postgresql-9.3 initdb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>configure postgresql to automatic start when OS starts:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$chkconfig postgresql-9.3 on</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>control service</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$service postgresql-9.3 start
+</span><span class='line'>$service postgresql-9.3 restart
+</span><span class='line'>$service postgresql-9.3 stop
+</span><span class='line'>$service postgresql-9.3 reload #reload pg_hba.conf while keep db running</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source: <a href="https://wiki.postgresql.org/wiki/YUM_Installation">https://wiki.postgresql.org/wiki/YUM_Installation</a><br></p>
 </div>
 
 
@@ -146,12 +181,12 @@
   
 
 
-<time datetime="2013-03-31T20:51:00-07:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time>
+<time datetime="2014-04-18T01:11:00-07:00" pubdate data-updated="true">Apr 18<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/outdoor/'>outdoor</a>
+    <a class='category' href='/blog/categories/postgresql/'>PostgreSQL</a>
   
 </span>
 
@@ -160,7 +195,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2013/03/31/outdoor-trails/" data-via="" data-counturl="http://colca.github.com/blog/2013/03/31/outdoor-trails/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/" data-via="" data-counturl="http://colca.github.com/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/" >Tweet</a>
   
   
   
@@ -169,10 +204,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/03/28/setup-octopress-blog-on-windows-7/" title="Previous Post: How To Setup Octopress on Windows 7">&laquo; How To Setup Octopress on Windows 7</a>
+        <a class="basic-alignment left" href="/blog/2014/04/12/hadoop-install-sqoop-on-centos/" title="Previous Post: Hadoop: Install Sqoop on centos">&laquo; Hadoop: Install Sqoop on centos</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/04/13/how-to-format-code-in-vim/" title="Next Post: Vi: format code">Vi: format code &raquo;</a>
       
     </p>
   </footer>

@@ -9,8 +9,9 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Apache Sqoop Page: http://sqoop.apache.org/ My Hadoop Version : 2.2.0
-Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz Download Sqoop and &hellip;">
+  <meta name="description" content="Install and start PostgreSQL
+configure YUM repository /etc/yum.repos.d/CentOS-Base.repo, [base]&amp;[update] sections, append line: 1
+exclude= &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,107 @@ Sqoop version: sqoop-1.4.4.bin__hadoop-2.0.4-alpha.tar.gz Download Sqoop and &he
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/">Install PostgreSQL on CentOS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-18T01:11:00-07:00" pubdate data-updated="true">Apr 18<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>Install and start PostgreSQL<br></li>
+<li>configure YUM repository<br></li>
+</ul>
+
+
+<p>/etc/yum.repos.d/CentOS-Base.repo, [base]&amp;[update] sections, append line:<br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>exclude=postgresql*</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>download and install RPM <br>
+view  <a href="http://yum.postgresql.org">http://yum.postgresql.org</a> to find correct RPM</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$curl -O http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+</span><span class='line'>$rpm -ivh pgdg-centos93-9.3.1.noarch.rpm</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>install PostgreSql</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$yum list postgres*
+</span><span class='line'>$yum install postgresql193-server</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>initialize (only need once)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$service postgresql-9.3 initdb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>configure postgresql to automatic start when OS starts:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$chkconfig postgresql-9.3 on</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>control service</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$service postgresql-9.3 start
+</span><span class='line'>$service postgresql-9.3 restart
+</span><span class='line'>$service postgresql-9.3 stop
+</span><span class='line'>$service postgresql-9.3 reload #reload pg_hba.conf while keep db running</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source: <a href="https://wiki.postgresql.org/wiki/YUM_Installation">https://wiki.postgresql.org/wiki/YUM_Installation</a><br></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1159,93 +1261,6 @@ Reset using commit-sha or numbers: </br></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/20/setup-piwik-for-octopress-analytics/">Setup Piwik for Octopress Analytics</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-20T19:00:00-07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
-<li><p>Install Piwik on Ubunto 12.04 Cloud Server</br>
-Instruction Details: <a href="https://www.digitalocean.com/community/articles/how-to-install-piwik-on-an-ubuntu-12-04-cloud-server">https://www.digitalocean.com/community/articles/how-to-install-piwik-on-an-ubuntu-12-04-cloud-server</a> </br></p></li>
-<li><p>Add Piwik Script to Each Octopress Blog</br></p></li>
-</ol>
-
-
-<p>Edit your source/_includes/custom/after_footer.html, add below script</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- Piwik --&gt;
-</span><span class='line'>&lt;script type="text/javascript"&gt; 
-</span><span class='line'>  var _paq = _paq || [];
-</span><span class='line'>  _paq.push(['trackPageView']);
-</span><span class='line'>  _paq.push(['enableLinkTracking']);
-</span><span class='line'>  (function() {
-</span><span class='line'>    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://127.0.0.1/piwik//";
-</span><span class='line'>    _paq.push(['setTrackerUrl', u+'piwik.php']);
-</span><span class='line'>    _paq.push(['setSiteId', 1]);
-</span><span class='line'>    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-</span><span class='line'>    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-</span><span class='line'>  })();
-</span><span class='line'>
-</span><span class='line'>&lt;/script&gt;
-</span><span class='line'>&lt;noscript&gt;&lt;p&gt;&lt;img src="http://127.0.0.1/piwik/piwik.php?idsite=1" style="border:0" alt="" /&gt;&lt;/p&gt;&lt;/noscript&gt;
-</span><span class='line'>&lt;!-- End Piwik Code --&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  <br/>
-reforence: <a href="http://octopress.org/docs/theme/template/">http://octopress.org/docs/theme/template/</a> </br>
-//github.com/WyriHaximus/OctopressPiwik </br></p>
-
-<ol>
-<li>Login to Piwik to view the realtime analytics
-<a href="http://127.0.0.1/piwik/index.php">http://127.0.0.1/piwik/index.php</a></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1261,6 +1276,10 @@ reforence: <a href="http://octopress.org/docs/theme/template/">http://octopress.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/18/hive-configure-hive-metastore-to-postgresql/">Install PostgreSQL on CentOS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/12/hadoop-install-sqoop-on-centos/">Hadoop: Install Sqoop on Centos</a>
       </li>
     
@@ -1274,10 +1293,6 @@ reforence: <a href="http://octopress.org/docs/theme/template/">http://octopress.
     
       <li class="post">
         <a href="/blog/2014/02/20/linux-get-file-count-and-total-size/">Linux : Get File Count and Total Size</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/17/ruby-rescue-nomethoderror-inside-loop/">Ruby : Rescue NoMethodError Inside Loop</a>
       </li>
     
   </ul>

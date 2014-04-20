@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hadoop Hive | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/hadoop-hive/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-19T23:31:44-07:00</updated>
+  <updated>2014-04-19T23:33:24-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -34,12 +34,12 @@ Start or restart postgresql service
 <code>
 $sudo service postgresql-9.3 start
 </code></p></li>
-<li><p>Step2 Install Postgres JDBC Driver (for Redhat 6)
+<li><p>Step 2 Install Postgres JDBC Driver (for Redhat 6)
 <code>
 $sudo yum install postgresql-jdbc
 $ln -s /usr/share/java/postgresql-jdbc.jar /usr/lib/hive/lib/postgresql-jdbc.jar
 </code></p></li>
-<li><p>Step3 Create the metastore database and user account
+<li><p>Step 3 Create the metastore database and user account
 <code>
 $sudo su - postgres
 bash$ psql
@@ -66,7 +66,7 @@ Verify the connection:
 psql -h myhost -U hiveuser -d metastore
 metastore=#
 </code></p></li>
-<li>Step4 Configure Metastore Service to Communicate with the PostgreSQL DB
+<li>Step 4 Configure Metastore Service to Communicate with the PostgreSQL DB
 ```
 $vi /usr/lib/hive/conf/hive-site.xml
 
@@ -107,7 +107,7 @@ $vi /usr/lib/hive/conf/hive-site.xml
 ```</p>
 
 <ul>
-<li>Step 6 Test connectivity to metastore
+<li>Step 5 Test connectivity to metastore
 <code>
 $hive -e "show tables;"
 </code></li>

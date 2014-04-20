@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-19T23:31:44-07:00</updated>
+  <updated>2014-04-19T23:33:24-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -45,7 +45,7 @@ Set standard_confroming_strings to off</li>
 
 
 <ul>
-<li>Step2 Install Postgres JDBC Driver (for Redhat 6)</li>
+<li>Step 2 Install Postgres JDBC Driver (for Redhat 6)</li>
 </ul>
 
 
@@ -56,7 +56,7 @@ Set standard_confroming_strings to off</li>
 
 
 <ul>
-<li>Step3 Create the metastore database and user account</li>
+<li>Step 3 Create the metastore database and user account</li>
 </ul>
 
 
@@ -107,7 +107,7 @@ Set standard_confroming_strings to off</li>
 
 
 <ul>
-<li>Step4 Configure Metastore Service to Communicate with the PostgreSQL DB</li>
+<li>Step 4 Configure Metastore Service to Communicate with the PostgreSQL DB</li>
 </ul>
 
 
@@ -178,7 +178,7 @@ Set standard_confroming_strings to off</li>
 
 
 <ul>
-<li>Step 6 Test connectivity to metastore</li>
+<li>Step 5 Test connectivity to metastore</li>
 </ul>
 
 

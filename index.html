@@ -98,7 +98,7 @@ $vi /var/lib/pgsql/9.3/data/postgresql.conf &hellip;">
 
 
   <div class="entry-content"><ul>
-<li>Step 1 <a href="http://colca7.com/blog/2014/04/18/install-postgresql-on-centos/" target="_blank">Install and start PostgreSQL</a>
+<li>Step 1 <a href="http://colca7.com/blog/2014/04/18/install-postgresql-on-centos/" target="_blank">Install and start PostgreSQL</a><br>
 Set standard_confroming_strings to off</li>
 </ul>
 
@@ -265,8 +265,8 @@ Set standard_confroming_strings to off</li>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$hive -e "show tables;"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Trouble Shooting
-+ psql 9.3: fatal: ident authentication failed for user<br>
+<p>Trouble Shooting <br>
++ psql 9.3: fatal: ident authentication failed for user<br><br>
 ident authentication configuration will cause above error when trying to connect metastore with hiveuser, using md5 (more secure) or password instead in the pg_hba.conf<br>
 <a href="https://docs.google.com/document/d/13ymGYj9e7YPFiaffwixLzsWJygp_OfBmgBi4Axgrg5A/edit">Sample doc</a><br></p>
 
@@ -277,7 +277,7 @@ ident authentication configuration will cause above error when trying to connect
 
 
 <ul>
-<li>FAILED: Error in metadata: MetaException(message:Got exception: org.apache.hadoop.hive.metastore.api.MetaException javax.jdo.JDODataStoreException: Error executing JDOQL query &ldquo;SELECT &#8220;THIS&rdquo;.&ldquo;TBL_NAME&rdquo; AS NUCORDER0 FROM &ldquo;TBLS&rdquo; &ldquo;THIS&rdquo; LEFT OUTER JOIN &ldquo;DBS&rdquo; &ldquo;THIS_DATABASE_NAME&rdquo; ON &ldquo;THIS&rdquo;.&ldquo;DB_ID&rdquo; = &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;DB_ID&rdquo; WHERE &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;NAME&rdquo; = ? AND (LOWER(&ldquo;THIS&rdquo;.&ldquo;TBL_NAME&rdquo;) LIKE ? ESCAPE &lsquo;\&rsquo; ) ORDER BY NUCORDER0 &ldquo; : ERROR: invalid escape string<br>
+<li>FAILED: Error in metadata: MetaException(message:Got exception: org.apache.hadoop.hive.metastore.api.MetaException javax.jdo.JDODataStoreException: Error executing JDOQL query &ldquo;SELECT &#8220;THIS&rdquo;.&ldquo;TBL_NAME&rdquo; AS NUCORDER0 FROM &ldquo;TBLS&rdquo; &ldquo;THIS&rdquo; LEFT OUTER JOIN &ldquo;DBS&rdquo; &ldquo;THIS_DATABASE_NAME&rdquo; ON &ldquo;THIS&rdquo;.&ldquo;DB_ID&rdquo; = &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;DB_ID&rdquo; WHERE &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;NAME&rdquo; = ? AND (LOWER(&ldquo;THIS&rdquo;.&ldquo;TBL_NAME&rdquo;) LIKE ? ESCAPE &lsquo;\&rsquo; ) ORDER BY NUCORDER0 &ldquo; : ERROR: invalid escape string<br><br>
 This is caused by setting standard_conforming_strings to on in postgresql.conf, set it off will eliminate the error.</li>
 </ul>
 
@@ -288,7 +288,7 @@ This is caused by setting standard_conforming_strings to on in postgresql.conf, 
 </span><span class='line'>standard_conforming_strings=off #set this off</span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>Source: <a href="http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/4.2.0/CDH4-Installation-Guide/cdh4ig_topic_18_4.html">http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/4.2.0/CDH4-Installation-Guide/cdh4ig_topic_18_4.html</a><br></p>
 </div>
   
   

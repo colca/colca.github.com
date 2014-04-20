@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hadoop Hive | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/hadoop-hive/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-19T23:29:10-07:00</updated>
+  <updated>2014-04-19T23:31:44-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -19,7 +19,7 @@
     <updated>2014-04-18T17:31:00-07:00</updated>
     <id>http://colca.github.com/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore</id>
     <content type="html"><![CDATA[<ul>
-<li><p>Step 1 <a href="http://colca7.com/blog/2014/04/18/install-postgresql-on-centos/" target="_blank">Install and start PostgreSQL</a>
+<li><p>Step 1 <a href="http://colca7.com/blog/2014/04/18/install-postgresql-on-centos/" target="_blank">Install and start PostgreSQL</a><br>
 Set standard_confroming_strings to off
 <code>
 $vi /var/lib/pgsql/9.3/data/postgresql.conf
@@ -114,8 +114,8 @@ $hive -e "show tables;"
 </ul>
 
 
-<p>Trouble Shooting
-+ psql 9.3: fatal: ident authentication failed for user<br>
+<p>Trouble Shooting <br>
++ psql 9.3: fatal: ident authentication failed for user<br><br>
 ident authentication configuration will cause above error when trying to connect metastore with hiveuser, using md5 (more secure) or password instead in the pg_hba.conf<br>
 <a href="https://docs.google.com/document/d/13ymGYj9e7YPFiaffwixLzsWJygp_OfBmgBi4Axgrg5A/edit">Sample doc</a><br>
 <code>
@@ -124,7 +124,7 @@ host    all         all         0.0.0.0         0.0.0.0               md5
 </code></p>
 
 <ul>
-<li>FAILED: Error in metadata: MetaException(message:Got exception: org.apache.hadoop.hive.metastore.api.MetaException javax.jdo.JDODataStoreException: Error executing JDOQL query &ldquo;SELECT "THIS&rdquo;.&ldquo;TBL_NAME&rdquo; AS NUCORDER0 FROM &ldquo;TBLS&rdquo; &ldquo;THIS&rdquo; LEFT OUTER JOIN &ldquo;DBS&rdquo; &ldquo;THIS_DATABASE_NAME&rdquo; ON &ldquo;THIS&rdquo;.&ldquo;DB_ID&rdquo; = &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;DB_ID&rdquo; WHERE &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;NAME&rdquo; = ? AND (LOWER(&ldquo;THIS&rdquo;.&ldquo;TBL_NAME&rdquo;) LIKE ? ESCAPE &lsquo;\&rsquo; ) ORDER BY NUCORDER0 &ldquo; : ERROR: invalid escape string<br>
+<li>FAILED: Error in metadata: MetaException(message:Got exception: org.apache.hadoop.hive.metastore.api.MetaException javax.jdo.JDODataStoreException: Error executing JDOQL query &ldquo;SELECT "THIS&rdquo;.&ldquo;TBL_NAME&rdquo; AS NUCORDER0 FROM &ldquo;TBLS&rdquo; &ldquo;THIS&rdquo; LEFT OUTER JOIN &ldquo;DBS&rdquo; &ldquo;THIS_DATABASE_NAME&rdquo; ON &ldquo;THIS&rdquo;.&ldquo;DB_ID&rdquo; = &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;DB_ID&rdquo; WHERE &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;NAME&rdquo; = ? AND (LOWER(&ldquo;THIS&rdquo;.&ldquo;TBL_NAME&rdquo;) LIKE ? ESCAPE &lsquo;\&rsquo; ) ORDER BY NUCORDER0 &ldquo; : ERROR: invalid escape string<br><br>
 This is caused by setting standard_conforming_strings to on in postgresql.conf, set it off will eliminate the error.
 <code>
 $vi /var/lib/pgsql/9.3/data/postgresql.conf
@@ -132,6 +132,8 @@ standard_conforming_strings=off #set this off
 </code></li>
 </ul>
 
+
+<p>Source: <a href="http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/4.2.0/CDH4-Installation-Guide/cdh4ig_topic_18_4.html">http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/4.2.0/CDH4-Installation-Guide/cdh4ig_topic_18_4.html</a><br></p>
 ]]></content>
   </entry>
   

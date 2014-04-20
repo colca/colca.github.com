@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hadoop Hive | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/hadoop-hive/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-19T23:34:49-07:00</updated>
+  <updated>2014-04-19T23:35:44-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -114,22 +114,22 @@ $hive -e "show tables;"
 </ul>
 
 
-<p>Trouble Shooting <br>
-* psql 9.3: fatal: ident authentication failed for user<br><br>
+<p>Trouble Shooting <br><br></p>
+
+<ul>
+<li><p>psql 9.3: fatal: ident authentication failed for user<br><br>
 ident authentication configuration will cause above error when trying to connect metastore with hiveuser, using md5 (more secure) or password instead in the pg_hba.conf<br>
 <a href="https://docs.google.com/document/d/13ymGYj9e7YPFiaffwixLzsWJygp_OfBmgBi4Axgrg5A/edit">Sample doc</a><br>
 <code>
 $vi /var/lib/pgsql/9.3/data/pg_hba.conf
 host    all         all         0.0.0.0         0.0.0.0               md5
-</code></p>
-
-<ul>
-<li>FAILED: Error in metadata: MetaException(message:Got exception: org.apache.hadoop.hive.metastore.api.MetaException javax.jdo.JDODataStoreException: Error executing JDOQL query &ldquo;SELECT "THIS&rdquo;.&ldquo;TBL_NAME&rdquo; AS NUCORDER0 FROM &ldquo;TBLS&rdquo; &ldquo;THIS&rdquo; LEFT OUTER JOIN &ldquo;DBS&rdquo; &ldquo;THIS_DATABASE_NAME&rdquo; ON &ldquo;THIS&rdquo;.&ldquo;DB_ID&rdquo; = &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;DB_ID&rdquo; WHERE &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;NAME&rdquo; = ? AND (LOWER(&ldquo;THIS&rdquo;.&ldquo;TBL_NAME&rdquo;) LIKE ? ESCAPE &lsquo;\&rsquo; ) ORDER BY NUCORDER0 &ldquo; : ERROR: invalid escape string<br><br>
+</code></p></li>
+<li><p>FAILED: Error in metadata: MetaException(message:Got exception: org.apache.hadoop.hive.metastore.api.MetaException javax.jdo.JDODataStoreException: Error executing JDOQL query &ldquo;SELECT "THIS&rdquo;.&ldquo;TBL_NAME&rdquo; AS NUCORDER0 FROM &ldquo;TBLS&rdquo; &ldquo;THIS&rdquo; LEFT OUTER JOIN &ldquo;DBS&rdquo; &ldquo;THIS_DATABASE_NAME&rdquo; ON &ldquo;THIS&rdquo;.&ldquo;DB_ID&rdquo; = &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;DB_ID&rdquo; WHERE &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;NAME&rdquo; = ? AND (LOWER(&ldquo;THIS&rdquo;.&ldquo;TBL_NAME&rdquo;) LIKE ? ESCAPE &lsquo;\&rsquo; ) ORDER BY NUCORDER0 &ldquo; : ERROR: invalid escape string<br><br>
 This is caused by setting standard_conforming_strings to on in postgresql.conf, set it off will eliminate the error.
 <code>
 $vi /var/lib/pgsql/9.3/data/postgresql.conf
 standard_conforming_strings=off #set this off
-</code></li>
+</code></p></li>
 </ul>
 
 

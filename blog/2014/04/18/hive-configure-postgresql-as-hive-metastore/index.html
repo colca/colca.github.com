@@ -262,10 +262,14 @@ Set standard_confroming_strings to off</li>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$hive -e "show tables;"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Trouble Shooting <br>
-* psql 9.3: fatal: ident authentication failed for user<br><br>
+<p>Trouble Shooting <br><br></p>
+
+<ul>
+<li>psql 9.3: fatal: ident authentication failed for user<br><br>
 ident authentication configuration will cause above error when trying to connect metastore with hiveuser, using md5 (more secure) or password instead in the pg_hba.conf<br>
-<a href="https://docs.google.com/document/d/13ymGYj9e7YPFiaffwixLzsWJygp_OfBmgBi4Axgrg5A/edit">Sample doc</a><br></p>
+<a href="https://docs.google.com/document/d/13ymGYj9e7YPFiaffwixLzsWJygp_OfBmgBi4Axgrg5A/edit">Sample doc</a><br></li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

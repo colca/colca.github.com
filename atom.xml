@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-19T22:34:08-07:00</updated>
+  <updated>2014-04-19T23:29:10-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -19,8 +19,196 @@
     <updated>2014-04-18T17:31:00-07:00</updated>
     <id>http://colca.github.com/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore</id>
     <content type="html"><![CDATA[<ul>
-<li><a href="http://colca7.com/blog/2014/04/18/install-postgresql-on-centos/" target="_blank">Install PostgreSQL</a></li>
+<li>Step 1 <a href="http://colca7.com/blog/2014/04/18/install-postgresql-on-centos/" target="_blank">Install and start PostgreSQL</a>
+Set standard_confroming_strings to off</li>
 </ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /var/lib/pgsql/9.3/data/postgresql.conf
+</span><span class='line'>standard_conforming_strings=off #set this off</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Allow remote access</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /var/lib/pgsql/9.3/data/pg_hba.conf
+</span><span class='line'>host    all         all         0.0.0.0         0.0.0.0               md5 #modify ident to md5 or password</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start or restart postgresql service</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sudo service postgresql-9.3 start</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Step2 Install Postgres JDBC Driver (for Redhat 6)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sudo yum install postgresql-jdbc
+</span><span class='line'>$ln -s /usr/share/java/postgresql-jdbc.jar /usr/lib/hive/lib/postgresql-jdbc.jar</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Step3 Create the metastore database and user account</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$sudo su - postgres
+</span><span class='line'>bash$ psql
+</span><span class='line'>postgres=# CREATE USER hiveuser WITH PASSWORD 'mypassword';
+</span><span class='line'>postgres=# CREATE DATABASE metastore;
+</span><span class='line'>postgres=# \c metastore;
+</span><span class='line'>You are now connected to database 'metastore'.
+</span><span class='line'>metastore=# \i /usr/lib/hive/scripts/metastore/upgrade/postgres/hive-schema-0.10.0.postgres.sql
+</span><span class='line'>SET
+</span><span class='line'>SET
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Grant permission for all metastore tables to user hiveuser by the following SQL script</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>metastore=#  \o /tmp/grant-privs
+</span><span class='line'>metastore=#   SELECT 'GRANT SELECT,INSERT,UPDATE,DELETE ON "' || schemaname || '"."' || tablename || '" TO hiveuser;'
+</span><span class='line'>metasotre=#       FROM pg_tables
+</span><span class='line'>metastore=#       WHERE tableowner = CURRENT_USER and schemaname = 'public';
+</span><span class='line'>metastore=#       \o
+</span><span class='line'>metastore=#       \i /tmp/grant-privs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Verify the connection:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>psql -h myhost -U hiveuser -d metastore
+</span><span class='line'>metastore=#</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Step4 Configure Metastore Service to Communicate with the PostgreSQL DB</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /usr/lib/hive/conf/hive-site.xml
+</span><span class='line'>#Modify following properties
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;jdbc:postgresql://myhost/metastore&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'> 
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;org.postgresql.Driver&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'> 
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;hiveuser&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'> 
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;mypassword&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'> 
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;datanucleus.autoCreateSchema&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;false&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;hive.metastore.uris&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;&lt;/value&gt;
+</span><span class='line'>  &lt;description&gt;IP address (or fully-qualified domain name) and port of the metastore host&lt;/description&gt;
+</span><span class='line'>&lt;/property&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Step 6 Test connectivity to metastore</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$hive -e "show tables;"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Trouble Shooting
++ psql 9.3: fatal: ident authentication failed for user<br>
+ident authentication configuration will cause above error when trying to connect metastore with hiveuser, using md5 (more secure) or password instead in the pg_hba.conf<br>
+<a href="https://docs.google.com/document/d/13ymGYj9e7YPFiaffwixLzsWJygp_OfBmgBi4Axgrg5A/edit">Sample doc</a><br></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /var/lib/pgsql/9.3/data/pg_hba.conf
+</span><span class='line'>host    all         all         0.0.0.0         0.0.0.0               md5</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>FAILED: Error in metadata: MetaException(message:Got exception: org.apache.hadoop.hive.metastore.api.MetaException javax.jdo.JDODataStoreException: Error executing JDOQL query &ldquo;SELECT &#8220;THIS&rdquo;.&ldquo;TBL_NAME&rdquo; AS NUCORDER0 FROM &ldquo;TBLS&rdquo; &ldquo;THIS&rdquo; LEFT OUTER JOIN &ldquo;DBS&rdquo; &ldquo;THIS_DATABASE_NAME&rdquo; ON &ldquo;THIS&rdquo;.&ldquo;DB_ID&rdquo; = &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;DB_ID&rdquo; WHERE &ldquo;THIS_DATABASE_NAME&rdquo;.&ldquo;NAME&rdquo; = ? AND (LOWER(&ldquo;THIS&rdquo;.&ldquo;TBL_NAME&rdquo;) LIKE ? ESCAPE &lsquo;\&rsquo; ) ORDER BY NUCORDER0 &ldquo; : ERROR: invalid escape string<br>
+This is caused by setting standard_conforming_strings to on in postgresql.conf, set it off will eliminate the error.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /var/lib/pgsql/9.3/data/postgresql.conf
+</span><span class='line'>standard_conforming_strings=off #set this off</span></code></pre></td></tr></table></div></figure>
+
+
 
 ]]></content>
   </entry>

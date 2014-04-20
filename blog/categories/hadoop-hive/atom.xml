@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hadoop Hive | KamAcoma]]></title>
   <link href="http://colca.github.com/blog/categories/hadoop-hive/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-19T23:33:24-07:00</updated>
+  <updated>2014-04-19T23:34:49-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -115,7 +115,7 @@ $hive -e "show tables;"
 
 
 <p>Trouble Shooting <br>
-+ psql 9.3: fatal: ident authentication failed for user<br><br>
+* psql 9.3: fatal: ident authentication failed for user<br><br>
 ident authentication configuration will cause above error when trying to connect metastore with hiveuser, using md5 (more secure) or password instead in the pg_hba.conf<br>
 <a href="https://docs.google.com/document/d/13ymGYj9e7YPFiaffwixLzsWJygp_OfBmgBi4Axgrg5A/edit">Sample doc</a><br>
 <code>

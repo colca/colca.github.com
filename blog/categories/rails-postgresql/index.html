@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hive with PostgreSQL: message:javax.jdo.JDOException: Couldnt obtain a new sequence (unique id) - KamAcoma</title>
+  <title>Category: Rails PostgreSQL - KamAcoma</title>
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="After configuring PostgreSQL as metastore of Hive, &lsquo;show tables&rsquo; works fine but creating table will give below error message: message: &hellip;">
+  <meta name="description" content="Category: Rails PostgreSQL">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id">
+  <link rel="canonical" href="http://colca.github.comblog/categories/rails-postgresql">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KamAcoma" type="application/atom+xml">
@@ -64,121 +64,35 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Hive With PostgreSQL: message:javax.jdo.JDOException: Couldnt Obtain a New Sequence (Unique Id)</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-21T23:08:00-07:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Rails PostgreSQL</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><p>After configuring PostgreSQL as metastore of Hive, &lsquo;show tables&rsquo; works fine but creating table will give below error message:<br><br></p>
 
-<p>message:javax.jdo.JDOException: Couldnt obtain a new sequence (unique id)<br></p>
+  
+  <h2>2014</h2>
 
-<p>Check log_directory to find out where is the postgreSQL log in postgresql.conf</p>
+<article>
+  
+<h1><a href="/blog/2014/04/22/rails-4-dot-0-uninitialized-constant-activerecord-connectionadapters-postgresqladapter-pg/">Rails 4.0: uninitialized constant ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::PG</a></h1>
+<time datetime="2014-04-22T02:22:00-07:00" pubdate><span class='month'>Apr</span> <span class='day'>22</span> <span class='year'>2014</span></time>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /var/lib/pgsql/9.3/data/postgresql.conf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Log shows  &ldquo;permission denied for relation CDS&rdquo;</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>INSERT INTO "SEQUENCE_TABLE" ("SEQUENCE_NAME","NEXT_VAL") VALUES ($1,$2)
-</span><span class='line'>  permission denied for relation CDS</span></code></pre></td></tr></table></div></figure>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/rails-postgresql/'>Rails PostgreSQL</a></span>
+</footer>
 
 
-<p>Solve the problem by granting privilege of schema and table to user hiveuser</p>
+</article>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$su postgres
-</span><span class='line'>$batch psql
-</span><span class='line'>postgres=# \c metastore  #metastore database which is used as metastore of Hive
-</span><span class='line'>metastore=# GRANT ALL ON SCHEMA public to hiveuser;
-</span><span class='line'>metastore=# GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO hiveuser;
-</span><span class='line'>metastore=# GRANT ALL ON ALL TABLES IN SCHEMA public TO hiveuser;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>source:<br>
-<a href="http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec">http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec</a><br></p>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">colca</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-21T23:08:00-07:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/hive-postgresql/'>Hive PostgreSQL</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/" data-via="" data-counturl="http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore/" title="Previous Post: hive: configure PostgreSQL as Hive Metastore">&laquo; hive: configure PostgreSQL as Hive Metastore</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/04/22/centos-postgresql-for-rails/" title="Next Post: CentOS: PostgreSQL for Rails">CentOS: PostgreSQL for Rails &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>

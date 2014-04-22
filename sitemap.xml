@@ -83,12 +83,18 @@
         <lastmod>2014-04-22T01:21:49-07:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://colca.github.com/blog/2014/04/22/rails-4-dot-0-uninitialized-constant-activerecord-connectionadapters-postgresqladapter-pg/
+        </loc>
+        <lastmod>2014-04-22T02:25:32-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://colca.github.com/blog/archives/</loc>
-        <lastmod>2014-04-22T01:21:49-07:00</lastmod>
+        <lastmod>2014-04-22T02:25:32-07:00</lastmod>
     </url>
     <url>
         <loc>http://colca.github.com/</loc>
-        <lastmod>2014-04-22T01:21:49-07:00</lastmod>
+        <lastmod>2014-04-22T02:25:32-07:00</lastmod>
     </url>
     <url>
         <loc>http://colca.github.com/robots.txt</loc>

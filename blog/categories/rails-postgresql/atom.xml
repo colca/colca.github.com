@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails PostgreSQL | KamAcoma]]></title>
+  <link href="http://colca.github.com/blog/categories/rails-postgresql/atom.xml" rel="self"/>
+  <link href="http://colca.github.com/"/>
+  <updated>2014-04-22T02:25:41-07:00</updated>
+  <id>http://colca.github.com/</id>
+  <author>
+    <name><![CDATA[colca]]></name>
+    <email><![CDATA[colca7@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 4.0: uninitialized constant ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::PG]]></title>
+    <link href="http://colca.github.com/blog/2014/04/22/rails-4-dot-0-uninitialized-constant-activerecord-connectionadapters-postgresqladapter-pg/"/>
+    <updated>2014-04-22T02:22:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/04/22/rails-4-dot-0-uninitialized-constant-activerecord-connectionadapters-postgresqladapter-pg</id>
+    <content type="html"><![CDATA[<p>After install pg 0.12.1, db can&rsquo;t be migrated, rake db:migrate causes error message after scaffolding:<br>
+&ldquo;uninitialized constant ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::PG&rdquo;<br></p>
+
+<p>Solution:<br>
+Update pg to &lsquo;0.15.1&rsquo;
+<code>
+$vi Gemfile
+gem 'pg', '0.15.1'
+$bundle update
+</code></p>
+
+<p>source:<a href="http://stackoverflow.com/questions/17411650/new-rails-app-postgres-wont-install">http://stackoverflow.com/questions/17411650/new-rails-app-postgres-wont-install</a></p>
+]]></content>
+  </entry>
+  
+</feed>

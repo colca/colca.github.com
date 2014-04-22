@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-22T01:25:59-07:00</updated>
+  <updated>2014-04-22T02:25:41-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 4.0: uninitialized constant ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::PG]]></title>
+    <link href="http://colca.github.com/blog/2014/04/22/rails-4-dot-0-uninitialized-constant-activerecord-connectionadapters-postgresqladapter-pg/"/>
+    <updated>2014-04-22T02:22:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/04/22/rails-4-dot-0-uninitialized-constant-activerecord-connectionadapters-postgresqladapter-pg</id>
+    <content type="html"><![CDATA[<p>After install pg 0.12.1, db can&rsquo;t be migrated, rake db:migrate causes error message after scaffolding:<br>
+&ldquo;uninitialized constant ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::PG&rdquo;<br></p>
+
+<p>Solution:<br>
+Update pg to &lsquo;0.15.1&rsquo;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi Gemfile
+</span><span class='line'>gem 'pg', '0.15.1'
+</span><span class='line'>$bundle update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source:<a href="http://stackoverflow.com/questions/17411650/new-rails-app-postgres-wont-install">http://stackoverflow.com/questions/17411650/new-rails-app-postgres-wont-install</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CentOS: PostgreSQL for Rails]]></title>

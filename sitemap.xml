@@ -70,15 +70,21 @@
         <loc>
             http://colca.github.com/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore/
         </loc>
-        <lastmod>2014-04-19T23:36:32-07:00</lastmod>
+        <lastmod>2014-04-19T23:37:19-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/
+        </loc>
+        <lastmod>2014-04-21T23:17:33-07:00</lastmod>
     </url>
     <url>
         <loc>http://colca.github.com/blog/archives/</loc>
-        <lastmod>2014-04-19T23:36:32-07:00</lastmod>
+        <lastmod>2014-04-21T23:17:33-07:00</lastmod>
     </url>
     <url>
         <loc>http://colca.github.com/</loc>
-        <lastmod>2014-04-19T23:36:32-07:00</lastmod>
+        <lastmod>2014-04-21T23:17:33-07:00</lastmod>
     </url>
     <url>
         <loc>http://colca.github.com/robots.txt</loc>

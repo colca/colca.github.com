@@ -4,7 +4,7 @@
   <title><![CDATA[KamAcoma]]></title>
   <link href="http://colca.github.com/atom.xml" rel="self"/>
   <link href="http://colca.github.com/"/>
-  <updated>2014-04-19T23:36:40-07:00</updated>
+  <updated>2014-04-21T23:17:44-07:00</updated>
   <id>http://colca.github.com/</id>
   <author>
     <name><![CDATA[colca]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hive with PostgreSQL: message:javax.jdo.JDOException: Couldnt obtain a new sequence (unique id)]]></title>
+    <link href="http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/"/>
+    <updated>2014-04-21T23:08:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id</id>
+    <content type="html"><![CDATA[<p>After configuring PostgreSQL as metastore of Hive, &lsquo;show tables&rsquo; works fine but creating table will give below error message:<br><br></p>
+
+<p>message:javax.jdo.JDOException: Couldnt obtain a new sequence (unique id)<br></p>
+
+<p>Check log_directory to find out where is the postgreSQL log in postgresql.conf</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /var/lib/pgsql/9.3/data/postgresql.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Log shows  &ldquo;permission denied for relation CDS&rdquo;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>INSERT INTO "SEQUENCE_TABLE" ("SEQUENCE_NAME","NEXT_VAL") VALUES ($1,$2)
+</span><span class='line'>  permission denied for relation CDS</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Solve the problem by granting privilege of schema and table to user hiveuser</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$su postgres
+</span><span class='line'>$batch psql
+</span><span class='line'>postgres=# \c metastore  #metastore database which is used as metastore of Hive
+</span><span class='line'>metastore=# GRANT ALL ON SCHEMA public to hiveuser;
+</span><span class='line'>metastore=# GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO hiveuser;
+</span><span class='line'>metastore=# GRANT ALL ON ALL TABLES IN SCHEMA public TO hiveuser;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source:<br>
+<a href="http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec">http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec</a><br></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[hive: configure PostgreSQL as Hive Metastore]]></title>
@@ -186,7 +230,10 @@ Set standard_confroming_strings to off</li>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$hive -e "show tables;"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Trouble Shooting <br><br></p>
+<br>
+
+
+<p>Trouble Shooting <br></p>
 
 <ul>
 <li>Ppsql 9.3: fatal: ident authentication failed for user<br><br>

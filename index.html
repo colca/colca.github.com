@@ -9,10 +9,7 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="Step 1 Install and start PostgreSQL
-Set standard_confroming_strings to off 1
-2
-$vi /var/lib/pgsql/9.3/data/postgresql.conf &hellip;">
+  <meta name="description" content="After configuring PostgreSQL as metastore of Hive, &lsquo;show tables&rsquo; works fine but creating table will give below error message: message: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +65,77 @@ $vi /var/lib/pgsql/9.3/data/postgresql.conf &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/">Hive With PostgreSQL: message:javax.jdo.JDOException: Couldnt Obtain a New Sequence (Unique Id)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-21T23:08:00-07:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After configuring PostgreSQL as metastore of Hive, &lsquo;show tables&rsquo; works fine but creating table will give below error message:<br><br></p>
+
+<p>message:javax.jdo.JDOException: Couldnt obtain a new sequence (unique id)<br></p>
+
+<p>Check log_directory to find out where is the postgreSQL log in postgresql.conf</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi /var/lib/pgsql/9.3/data/postgresql.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Log shows  &ldquo;permission denied for relation CDS&rdquo;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>INSERT INTO "SEQUENCE_TABLE" ("SEQUENCE_NAME","NEXT_VAL") VALUES ($1,$2)
+</span><span class='line'>  permission denied for relation CDS</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Solve the problem by granting privilege of schema and table to user hiveuser</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$su postgres
+</span><span class='line'>$batch psql
+</span><span class='line'>postgres=# \c metastore  #metastore database which is used as metastore of Hive
+</span><span class='line'>metastore=# GRANT ALL ON SCHEMA public to hiveuser;
+</span><span class='line'>metastore=# GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO hiveuser;
+</span><span class='line'>metastore=# GRANT ALL ON ALL TABLES IN SCHEMA public TO hiveuser;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source:<br>
+<a href="http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec">http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec</a><br></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -265,7 +333,10 @@ Set standard_confroming_strings to off</li>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$hive -e "show tables;"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Trouble Shooting <br><br></p>
+<br>
+
+
+<p>Trouble Shooting <br></p>
 
 <ul>
 <li>Ppsql 9.3: fatal: ident authentication failed for user<br><br>
@@ -1358,74 +1429,6 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/27/octopress-sync-octopress-on-different-machines/">Octopress: Sync Octopress on Different Machines</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-27T07:28:00-08:00" pubdate data-updated="true">Jan 27<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1.Follow normal setup process</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
-</span><span class='line'>ruby --version  # Should report Ruby 1.9.3
-</span><span class='line'>gem install bundler
-</span><span class='line'>bundle install
-</span><span class='line'>rake install
-</span><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>2.Pull latest updates from remote branch to sync new machine with latest octopress</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress\
-</span><span class='line'>git pull origin source
-</span><span class='line'>cd _deploy
-</span><span class='line'>git pull origin master</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you can use rake to deploy new blogs from another machine!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1441,6 +1444,10 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/">Hive With PostgreSQL: message:javax.jdo.JDOException: Couldnt Obtain a New Sequence (Unique Id)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/18/hive-configure-postgresql-as-hive-metastore/">Hive: Configure PostgreSQL as Hive Metastore</a>
       </li>
     
@@ -1454,10 +1461,6 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
     
       <li class="post">
         <a href="/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/">Rails: Upload Picture to S3 With Paperclip</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/08/hadoop-subprocess-failed-with-code-1/">Hadoop:subprocess Failed With Code 1</a>
       </li>
     
   </ul>

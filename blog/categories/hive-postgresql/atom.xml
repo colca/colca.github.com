@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hive PostgreSQL | KamAcoma]]></title>
+  <link href="http://colca.github.com/blog/categories/hive-postgresql/atom.xml" rel="self"/>
+  <link href="http://colca.github.com/"/>
+  <updated>2014-04-21T23:17:44-07:00</updated>
+  <id>http://colca.github.com/</id>
+  <author>
+    <name><![CDATA[colca]]></name>
+    <email><![CDATA[colca7@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hive with PostgreSQL: message:javax.jdo.JDOException: Couldnt obtain a new sequence (unique id)]]></title>
+    <link href="http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/"/>
+    <updated>2014-04-21T23:08:00-07:00</updated>
+    <id>http://colca.github.com/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id</id>
+    <content type="html"><![CDATA[<p>After configuring PostgreSQL as metastore of Hive, &lsquo;show tables&rsquo; works fine but creating table will give below error message:<br><br></p>
+
+<p>message:javax.jdo.JDOException: Couldnt obtain a new sequence (unique id)<br></p>
+
+<p>Check log_directory to find out where is the postgreSQL log in postgresql.conf
+<code>
+$vi /var/lib/pgsql/9.3/data/postgresql.conf
+</code></p>
+
+<p>Log shows  &ldquo;permission denied for relation CDS&rdquo;
+<code>
+INSERT INTO "SEQUENCE_TABLE" ("SEQUENCE_NAME","NEXT_VAL") VALUES ($1,$2)
+  permission denied for relation CDS
+</code></p>
+
+<p>Solve the problem by granting privilege of schema and table to user hiveuser
+<code>
+$su postgres
+$batch psql
+postgres=# \c metastore  #metastore database which is used as metastore of Hive
+metastore=# GRANT ALL ON SCHEMA public to hiveuser;
+metastore=# GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO hiveuser;
+metastore=# GRANT ALL ON ALL TABLES IN SCHEMA public TO hiveuser;
+</code></p>
+
+<p>source:<br>
+<a href="http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec">http://stackoverflow.com/questions/13497352/error-permission-denied-for-relation-tablename-on-postgres-while-trying-a-selec</a><br></p>
+]]></content>
+  </entry>
+  
+</feed>

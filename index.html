@@ -9,7 +9,7 @@
   <meta name="author" content="colca">
 
   
-  <meta name="description" content="After configuring PostgreSQL as metastore of Hive, &lsquo;show tables&rsquo; works fine but creating table will give below error message: message: &hellip;">
+  <meta name="description" content="After modifying Gemfile, install Gem pg or bundle update may cause error &ldquo;ERROR: Failed to build gem native extension.&rdquo; &ldquo;Gem files &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/22/centos-postgresql-for-rails/">CentOS: PostgreSQL for Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-22T01:16:00-07:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After modifying Gemfile, install Gem pg or bundle update may cause error <br>
+&ldquo;ERROR: Failed to build gem native extension.&rdquo; <br>
+&ldquo;Gem files will remain installed in /var/www/simpletrac/vendor/cache/ruby/1.9.1/gems/pg-    0.12.0 for inspection.
+Results logged to /var/www/simpletrac/vendor/cache/ruby/1.9.1/gems/pg-0.12.0/ext/gem_make.out
+An error occured while installing pg (0.12.0), and Bundler cannot continue.&rdquo;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#install gem
+</span><span class='line'>$gem install pg -v '0.12.0' -- --with-pg-config=/usr/pgsql-9.3/bin/pg_config
+</span><span class='line'>#config bundle
+</span><span class='line'>$bundle config build.pg --with-pg-config=/usr/pgsql-9.3/bin/pg_config
+</span><span class='line'>#bundle update
+</span><span class='line'>$bundle update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source: <a href="http://stackoverflow.com/questions/9234960/gem-install-pg-with-pg-config-works-bundle-fails">http://stackoverflow.com/questions/9234960/gem-install-pg-with-pg-config-works-bundle-fails</a><br></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1391,44 +1447,6 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/04/linux-check-linux-os-version/">Linux : Check Linux OS Version</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-04T18:22:00-08:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>getconf LONG_BIT</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1444,6 +1462,10 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/22/centos-postgresql-for-rails/">CentOS: PostgreSQL for Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/21/hive-with-postgresql-message-javax-dot-jdo-dot-jdoexception-couldnt-obtain-a-new-sequence-unique-id/">Hive With PostgreSQL: message:javax.jdo.JDOException: Couldnt Obtain a New Sequence (Unique Id)</a>
       </li>
     
@@ -1457,10 +1479,6 @@ Download hadoop tarball from: <a href="http://archive.apache.org/dist/hadoop/cor
     
       <li class="post">
         <a href="/blog/2014/04/12/hadoop-install-sqoop-on-centos/">Hadoop: Install Sqoop on Centos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/24/rails-upload-picture-to-s3-with-paperclip/">Rails: Upload Picture to S3 With Paperclip</a>
       </li>
     
   </ul>
